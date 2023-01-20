@@ -1,0 +1,4 @@
+# use tmux-style dividers rather than gaps/edges
+new_window pixel 1
+new_float pixel 1
+hide_edge_borders both
