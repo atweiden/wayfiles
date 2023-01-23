@@ -2,3 +2,25 @@
 new_window pixel 1
 new_float pixel 1
 hide_edge_borders both
+
+# toggle (show/hide) i3status-rs bar
+bindsym $mod+m bar mode toggle
+
+bar {
+  # hide bar by default, show with modifier key
+  mode hide
+  position top
+  status_command i3status-rs
+  tray_output primary
+  wheel_up_cmd nop
+  wheel_down_cmd nop
+  colors {
+    separator $base
+    background $base
+    statusline $base
+    focused_workspace $peach $base $text
+    active_workspace $mauve $base $text
+    inactive_workspace $base $base $text
+    urgent_workspace $red $base $text
+  }
+}
