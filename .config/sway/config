@@ -24,3 +24,7 @@ bar {
     urgent_workspace $red $base $text
   }
 }
+
+bar {
+  swaybar_command waybar
+}
