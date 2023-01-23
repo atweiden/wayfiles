@@ -3,6 +3,14 @@ new_window pixel 1
 new_float pixel 1
 hide_edge_borders both
 
+exec_always --no-startup-id swayidle -d \
+    timeout 10 'if pgrep swaylock; then swaymsg "output * dpms off"; fi'\
+        resume 'if pgrep swaylock; then swaymsg "output * dpms on"; fi' \
+    timeout 3600 'lock' \
+    timeout 3602 'swaymsg "output * dpms off"' \
+        resume 'swaymsg "output * dpms on"' \
+    before-sleep 'lock' >> /var/log/swayidle.log
+
 # toggle (show/hide) i3status-rs bar
 bindsym $mod+m bar mode toggle
 
