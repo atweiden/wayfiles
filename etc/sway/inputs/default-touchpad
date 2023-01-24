@@ -1,5 +1,5 @@
 input type:touchpad {
-  dwt disabled
+  dwt enabled
   tap disabled
   natural_scroll disabled
 }
