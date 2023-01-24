@@ -47,8 +47,4 @@ exec_always swayidle -d \
 
 exec mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY WOBSOCK
-exec hash dbus-update-activation-environment 2>/dev/null \
-  && dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY WOBSOCK
-
-# vim: set filetype=conf foldmethod=marker foldlevel=0 nowrap:
+# vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:

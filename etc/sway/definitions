@@ -10,4 +10,4 @@ set $theme /etc/sway/themes/seoul256
 set $shutdown wlogout --buttons-per-row 3
 set $idle swayidle -w timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
 
-# vim: set filetype=conf foldmethod=marker foldlevel=0 nowrap:
+# vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:

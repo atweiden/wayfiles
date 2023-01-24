@@ -5,4 +5,4 @@ input type:keyboard {
   xkb_options "caps:backspace,shift:both_capslock_cancel"
 }
 
-# vim: set filetype=conf foldmethod=marker foldlevel=0 nowrap:
+# vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:

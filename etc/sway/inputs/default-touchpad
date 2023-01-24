@@ -4,4 +4,4 @@ input type:touchpad {
   natural_scroll disabled
 }
 
-# vim: set filetype=conf foldmethod=marker foldlevel=0 nowrap:
+# vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:
