@@ -1,1 +1,35 @@
+# configure clutter for wayland
+CLUTTER_BACKEND=wayland
+
+# configure firefox for wayland
+MOZ_ENABLE_WAYLAND=1
+
+# configure gtk for wayland
+GDK_BACKEND=wayland
+
+# prevent waiting for xdg-desktop-portal (flatpak)
+GTK_USE_PORTAL=0
+
+# make firefox aware of wayland instance when launched from x11
+MOZ_DBUS_REMOTE=1
+
+# configure java applications for sway
 _JAVA_AWT_WM_NONREPARENTING=1
+
+# configure qt for wayland/sway
+QT_QPA_PLATFORM=wayland;xcb
+QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+
+# configure sdl for wayland
+SDL_VIDEODRIVER=wayland
+
+# configure seatd
+LIBSEAT_BACKEND=seatd
+
+# configure xdg for wayland/sway
+DESKTOP_SESSION=sway
+XDG_CURRENT_DESKTOP=sway
+XDG_SESSION_DESKTOP=sway
+XDG_SESSION_TYPE=wayland
+
+# vim: set filetype=dosini foldmethod=marker foldlevel=0 nowrap:

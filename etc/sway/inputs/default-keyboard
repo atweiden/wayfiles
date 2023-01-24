@@ -1,0 +1,8 @@
+input type:keyboard {
+  xkb_layout "us"
+  # use capslock key for backspace, press both shift keys for capslock,
+  # press one shift key to cancel capslock
+  xkb_options "caps:backspace,shift:both_capslock_cancel"
+}
+
+# vim: set filetype=conf foldmethod=marker foldlevel=0 nowrap:

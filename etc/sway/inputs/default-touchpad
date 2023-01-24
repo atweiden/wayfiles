@@ -1,0 +1,7 @@
+input type:touchpad {
+  dwt disabled
+  tap disabled
+  natural_scroll disabled
+}
+
+# vim: set filetype=conf foldmethod=marker foldlevel=0 nowrap:

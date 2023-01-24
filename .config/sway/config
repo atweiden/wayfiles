@@ -1,38 +1,54 @@
+xwayland enable
+
+focus_follows_mouse yes
+# hide cursor after 5 seconds of inactivity
+seat seat0 hide_cursor 5000
+bindgesture swipe:right workspace next
+bindgesture swipe:left workspace prev
+
 # use tmux-style dividers rather than gaps/edges
 new_window pixel 1
 new_float pixel 1
 hide_edge_borders both
 
-exec_always --no-startup-id swayidle -d \
-    timeout 10 'if pgrep swaylock; then swaymsg "output * dpms off"; fi'\
-        resume 'if pgrep swaylock; then swaymsg "output * dpms on"; fi' \
-    timeout 3600 'lock' \
-    timeout 3602 'swaymsg "output * dpms off"' \
-        resume 'swaymsg "output * dpms on"' \
-    before-sleep 'lock' >> /var/log/swayidle.log
+set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 
-# toggle (show/hide) i3status-rs bar
-bindsym $mod+m bar mode toggle
+# launch applications with fzf
+set $menu exec $term --class=launcher -e bash -c 'compgen -c | grep -v fzf | sort -u | fzf --layout=reverse | xargs -r swaymsg -t command exec'
+for_window [app_id="^launcher$"] floating enable, border none, opacity 0.8
+
+# take screenshots with grim/slurp
+set $screenshot grim ~/Downloads/screenshot-$(date +"%Y-%m-%d-%H-%M-%S").png
+set $screenclip slurp | grim -g - ~/Downloads/screenshot-$(date +"%Y-%m-%d-%H-%M-%S").png
+
+# toggle (show/hide) bar
+bindsym $mod+m bar mode toggle ; bar hidden_state toggle
+
+bindsym XF86AudioRaiseVolume exec pamixer -ui 5 && pamixer --get-volume > $WOBSOCK
+bindsym XF86AudioLowerVolume exec pamixer -ud 5 && pamixer --get-volume > $WOBSOCK
+bindsym XF86AudioMute exec pamixer --toggle-mute && ( pamixer --get-mute && echo 0 > $WOBSOCK ) || pamixer --get-volume > $WOBSOCK
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86MonBrightnessUp exec light -S "$(light -G | awk '{ print int(($1 + .72) * 1.4) }')" && light -G | cut -d'.' -f1 > $WOBSOCK
+bindsym XF86MonBrightnessDown exec light -S "$(light -G | awk '{ print int($1 / 1.4) }')" && light -G | cut -d'.' -f1 > $WOBSOCK
 
 bar {
   # hide bar by default, show with modifier key
   mode hide
+  hidden_state hide
   position top
-  status_command i3status-rs
-  tray_output primary
-  wheel_up_cmd nop
-  wheel_down_cmd nop
-  colors {
-    separator $base
-    background $base
-    statusline $base
-    focused_workspace $peach $base $text
-    active_workspace $mauve $base $text
-    inactive_workspace $base $base $text
-    urgent_workspace $red $base $text
-  }
-}
-
-bar {
   swaybar_command waybar
 }
+
+exec_always swayidle -d \
+  timeout 10 'if pgrep swaylock; then swaymsg "output * dpms off"; fi' resume 'if pgrep swaylock; then swaymsg "output * dpms on"; fi' \
+  timeout 3600 'lock' \
+  timeout 3602 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+  before-sleep 'lock' >> /var/log/swayidle.log
+
+exec mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
+
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY WOBSOCK
+exec hash dbus-update-activation-environment 2>/dev/null \
+  && dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY WOBSOCK
+
+# vim: set filetype=conf foldmethod=marker foldlevel=0 nowrap:
