@@ -9,13 +9,18 @@ configure swaybar (see: `man 5 sway-bar`)
 - left
   - numbered workspaces
 - right
-  - idle inhibitor state [1]
-  - disk space usage
-  - memory usage
-  - cpu temperature
-  - volume percentage
-  - battery percentage
+  - <idle inhibitor state icon> [1]
+  - disk: disk space usage
+  - mem: memory usage
+  - cpu: cpu temperature
+  - vol: volume percentage
+  - bat: battery percentage
   - internet
+    - if ethernet
+      - eth: ssid
+    - if wifi
+      - wifi: connectivity strength percentage
+      - ssid
   - date time
 
 
