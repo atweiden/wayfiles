@@ -7,7 +7,7 @@ set $right l
 
 set $lock waylock
 set $locking $lock -fork-on-lock
-set $idle swayidle -d \
+set $idle swayidle \
   timeout 30 'if pgrep $lock; then swaymsg "output * dpms off"; fi' resume 'if pgrep $lock; then swaymsg "output * dpms on"; fi' \
   timeout 300 'light -G > /tmp/brightness && light -S 10' resume 'light -S $([ -f /tmp/brightness ] && cat /tmp/brightness || echo 100%)' \
   timeout 420 'exec $locking' \
