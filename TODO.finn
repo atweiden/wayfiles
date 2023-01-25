@@ -7,21 +7,20 @@ configure sway
 
 configure swaybar (see: `man 5 sway-bar`)
 - left
-  - numbered workspaces
+  - <numbered workspaces>
 - right
-  - <idle inhibitor state icon> [1]
-  - disk: disk space usage
-  - mem: memory usage
-  - cpu: cpu temperature
-  - vol: volume percentage
-  - bat: battery percentage
+  - "<idle inhibitor state icon>" [1]
+  - "disk: <disk space used> / <disk space available>"
+  - "mem: <memory in use> / <memory available>"
+  - "cpu: <cpu temperature>°C"
+  - "vol: <volume percentage>%"
+  - "bat: <battery percentage>%"
   - internet
     - if ethernet
-      - eth: ssid
+      - "eth: <ssid>"
     - if wifi
-      - wifi: connectivity strength percentage
-      - ssid
-  - date time
+      - "wifi: <connectivity strength percentage>% <ssid>"
+  - "<date time>"
 
 
 ******************************************************************************
