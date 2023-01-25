@@ -1,7 +1,7 @@
-include /etc/sway/definitions
-include /etc/sway/inputs/*
-include /etc/sway/modes/*
-include /etc/sway/outputs/*
+include $XDG_CONFIG_HOME/sway/definitions
+include $XDG_CONFIG_HOME/sway/inputs/*
+include $XDG_CONFIG_HOME/sway/modes/*
+include $XDG_CONFIG_HOME/sway/outputs/*
 
 xwayland enable
 
