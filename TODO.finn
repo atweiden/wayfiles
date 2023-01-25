@@ -19,7 +19,7 @@ configure swaybar (see: `man 5 sway-bar`)
     - if ethernet
       - "eth: <ssid>"
     - if wifi
-      - "wifi: <connectivity strength percentage>% <ssid>"
+      - "wifi: <signal strength percentage>% <ssid>"
   - "<date time>"
 
 
