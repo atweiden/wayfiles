@@ -34,7 +34,12 @@ bar {
   swaybar_command $statusbar
 }
 
-exec_always $idle
+# set DISPLAY/WAYLAND_DISPLAY in systemd user environment, see: FS#63021
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY WOBSOCK
+exec hash dbus-update-activation-environment 2>/dev/null \
+  && dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY WOBSOCK
+
 exec mkfifo $WOBSOCK && tail --follow=$WOBSOCK | wob
+exec_always $idle
 
 # vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:
