@@ -5,9 +5,12 @@ set $down j
 set $up k
 set $right l
 
-set $theme /etc/sway/themes/seoul256
-
-set $shutdown wlogout --buttons-per-row 3
 set $idle swayidle -w timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
+set $screencap_dir ~/Downloads
+set $screenrec_file $screencap_dir/recording-$(date +'%Y-%m-%d-%H%M%S').mp4
+set $screenshot_file $screencap_dir/screenshot-$(date +'%Y-%m-%d-%H%M%S').png
+set $shutdown wlogout --buttons-per-row 3
+set $statusbar waybar
+set $theme /etc/sway/themes/seoul256
 
 # vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:

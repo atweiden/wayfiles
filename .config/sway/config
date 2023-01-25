@@ -1,28 +1,21 @@
 xwayland enable
 
+include /etc/sway/definitions
+include /etc/sway/inputs/*
+include /etc/sway/modes/*
+include /etc/sway/outputs/*
+
 focus_follows_mouse yes
 # hide cursor after 5 seconds of inactivity
 seat seat0 hide_cursor 5000
 bindgesture swipe:right workspace next
 bindgesture swipe:left workspace prev
 
-# use tmux-style dividers rather than gaps/edges
-new_window pixel 1
-new_float pixel 1
-hide_edge_borders both
-
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 
 # launch applications with fzf
 set $menu exec $term --class=launcher -e bash -c 'compgen -c | grep -v fzf | sort -u | fzf --layout=reverse | xargs -r swaymsg -t command exec'
 for_window [app_id="^launcher$"] floating enable, border none, opacity 0.8
-
-# take screenshots with grim/slurp
-set $screenshot grim ~/Downloads/screenshot-$(date +"%Y-%m-%d-%H-%M-%S").png
-set $screenclip slurp | grim -g - ~/Downloads/screenshot-$(date +"%Y-%m-%d-%H-%M-%S").png
-
-# toggle (show/hide) bar
-bindsym $mod+m bar mode toggle ; bar hidden_state toggle
 
 bindsym XF86AudioRaiseVolume exec pamixer -ui 5 && pamixer --get-volume > $WOBSOCK
 bindsym XF86AudioLowerVolume exec pamixer -ud 5 && pamixer --get-volume > $WOBSOCK
@@ -34,9 +27,10 @@ bindsym XF86MonBrightnessDown exec light -S "$(light -G | awk '{ print int($1 / 
 bar {
   # hide bar by default, show with modifier key
   mode hide
+  modifier $mod
   hidden_state hide
   position top
-  swaybar_command waybar
+  swaybar_command $statusbar
 }
 
 exec_always swayidle -d \

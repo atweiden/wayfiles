@@ -1,0 +1,2 @@
+# show wallpaper
+output * bg $background fill
