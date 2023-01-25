@@ -6,8 +6,6 @@ include /etc/sway/modes/*
 include /etc/sway/outputs/*
 
 focus_follows_mouse yes
-# hide cursor after 5 seconds of inactivity
-seat seat0 hide_cursor 5000
 bindgesture swipe:right workspace next
 bindgesture swipe:left workspace prev
 

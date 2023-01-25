@@ -1,0 +1,6 @@
+seat * {
+  # hide cursor after 5 seconds of inactivity
+  hide_cursor 5000
+}
+
+# vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:
