@@ -1,6 +1,9 @@
 input type:touchpad {
+  # disable touchpad while typing
   dwt enabled
+  # disable touchpad tap
   tap disabled
+  # disable "natural" scrolling
   natural_scroll disabled
 }
 

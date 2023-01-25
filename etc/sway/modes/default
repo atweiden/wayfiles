@@ -4,10 +4,10 @@ bindsym $mod+Return exec $term
 # launch application launcher
 bindsym $mod+space exec $menu
 
-# launch sway window switcher
+# launch window switcher
 bindsym $mod+Shift+space exec $selwin
 
-# super+left click to drag sway window, super+right click to resize
+# super+lclick to drag window, super+rclick to resize
 floating_modifier $mod normal
 
 # switch between windows

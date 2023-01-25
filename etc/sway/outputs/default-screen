@@ -1,2 +1,4 @@
 # show wallpaper
 output * bg $background fill
+
+# vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:
