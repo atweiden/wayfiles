@@ -6,3 +6,17 @@ port more of pacfiles
 configure sway
 
 configure swaybar (see: `man 5 sway-bar`)
+- left
+  - numbered workspaces
+- right
+  - idle inhibitor state [1]
+  - disk space usage
+  - memory usage
+  - cpu temperature
+  - battery percentage
+  - date time
+
+
+******************************************************************************
+
+[1]: https://git.sr.ht/~palb91/sway-man-inhibit
