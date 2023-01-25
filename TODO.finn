@@ -13,6 +13,7 @@ configure swaybar (see: `man 5 sway-bar`)
   - disk space usage
   - memory usage
   - cpu temperature
+  - volume percentage
   - battery percentage
   - internet
   - date time
