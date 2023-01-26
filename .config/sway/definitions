@@ -8,7 +8,7 @@ set {
 
   $bin $XDG_CONFIG_HOME/sway/bin
   $app_idle swayidle -w
-  $app_term $bin/term
+  $app_term $bin/shoe
   $app_mixer $app_term --app-id=termfloat ncpamixer
 
   # launch applications with fzf
