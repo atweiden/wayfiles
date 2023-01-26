@@ -1,0 +1,126 @@
+#!/usr/bin/env bash
+
+# OUT contains example output from `iw dev station dump`. It exists for
+# development purposes only.
+#
+# Credit: https://forum.openwrt.org/t/iw-dev-station-dump-interpretation/31890/2
+read -r -d '' OUT <<'EOF'
+inactive time:  4470 ms
+  rx bytes: 26333626454
+  rx packets: 18541754
+  tx bytes: 438581
+  tx packets: 5061
+  tx retries: 0
+  tx failed:  12
+  rx drop misc: 19
+  signal:   -55 [-65, -56, -95, -95] dBm
+  signal avg: -55 [-65, -56, -95, -95] dBm
+  tx bitrate: 400.0 MBit/s VHT-MCS 9 40MHz short GI VHT-NSS 2
+  rx bitrate: 12.0 MBit/s
+  rx duration:  754069640 us
+  authorized: yes
+  authenticated:  yes
+  associated: yes
+  preamble: long
+  WMM/WME:  yes
+  MFP:    no
+  TDLS peer:  no
+  DTIM period:  2
+  beacon interval:100
+  short slot time:yes
+  connected time: 1171 seconds
+EOF
+
+# `dbm_to_percent` converts a dBm value to a signal strength percent. It
+# expects to receive a number ranging from -1 to -100 (inclusive).
+#
+# Credit: https://www.intuitibits.com/2016/03/23/dbm_to_percent-conversion/
+dbm_to_percent() {
+  if [[ $1 -gt -21 ]]; then
+    echo 100
+  fi
+  case $1 in
+    -21|-22|-23) echo 99 ;;
+    -24|-25|-26) echo 98 ;;
+    -27|-28)     echo 97 ;;
+    -29|-30)     echo 96 ;;
+    -31|-32)     echo 95 ;;
+    -33)         echo 94 ;;
+    -34|-35)     echo 93 ;;
+    -36)         echo 92 ;;
+    -37)         echo 91 ;;
+    -38|-39)     echo 90 ;;
+    -40)         echo 89 ;;
+    -41)         echo 88 ;;
+    -42)         echo 87 ;;
+    -43)         echo 86 ;;
+    -44)         echo 85 ;;
+    -45)         echo 84 ;;
+    -46)         echo 83 ;;
+    -47)         echo 82 ;;
+    -48)         echo 81 ;;
+    -49)         echo 80 ;;
+    -50)         echo 79 ;;
+    -51)         echo 78 ;;
+    -52)         echo 76 ;;
+    -53)         echo 75 ;;
+    -54)         echo 74 ;;
+    -55)         echo 73 ;;
+    -56)         echo 71 ;;
+    -57)         echo 70 ;;
+    -58)         echo 69 ;;
+    -59)         echo 67 ;;
+    -60)         echo 66 ;;
+    -61)         echo 64 ;;
+    -62)         echo 63 ;;
+    -63)         echo 61 ;;
+    -64)         echo 60 ;;
+    -65)         echo 58 ;;
+    -66)         echo 56 ;;
+    -67)         echo 55 ;;
+    -68)         echo 53 ;;
+    -69)         echo 51 ;;
+    -70)         echo 50 ;;
+    -71)         echo 48 ;;
+    -72)         echo 46 ;;
+    -73)         echo 44 ;;
+    -74)         echo 42 ;;
+    -75)         echo 40 ;;
+    -76)         echo 38 ;;
+    -77)         echo 36 ;;
+    -78)         echo 34 ;;
+    -79)         echo 32 ;;
+    -80)         echo 30 ;;
+    -81)         echo 28 ;;
+    -82)         echo 26 ;;
+    -83)         echo 24 ;;
+    -84)         echo 22 ;;
+    -85)         echo 20 ;;
+    -86)         echo 17 ;;
+    -87)         echo 15 ;;
+    -88)         echo 13 ;;
+    -89)         echo 10 ;;
+    -90)         echo 8 ;;
+    -91)         echo 6 ;;
+    -92)         echo 3 ;;
+    *)           echo 1 ;;
+  esac
+}
+
+# `signal_strength` converts output from `iw dev station dump` into a
+# signal strength percent.
+signal_strength() {
+  readarray -t lines <<<"$OUT"
+  for line in "${lines[@]}"; do
+    if [[ "$line" =~ [[:space:]]+"signal:" ]]; then
+      read -ra line_components <<<"$line"
+      dbm_to_percent "${line_components[1]}"
+    fi
+  done
+}
+
+main() {
+  signal_strength
+}
+
+main
