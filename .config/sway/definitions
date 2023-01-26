@@ -7,6 +7,7 @@ set {
   $right l
 
   $bin $XDG_CONFIG_HOME/sway/bin
+
   $app_idle swayidle -w
   $app_term $bin/shoe
   $app_mixer $app_term --app-id=termfloat ncpamixer
@@ -20,7 +21,7 @@ set {
 
   $statusbar swaybar
 
-  $theme /etc/sway/themes/seoul256
+  $theme $XDG_CONFIG_HOME/sway/themes/seoul256
 
   $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 }
