@@ -37,73 +37,73 @@ EOF
 # Credit: https://www.intuitibits.com/2016/03/23/dbm_to_percent-conversion/
 dbm_to_percent() {
   if [[ $1 -gt -21 ]]; then
-    echo 100
+    return 100
   fi
   case $1 in
-    -21|-22|-23) echo 99 ;;
-    -24|-25|-26) echo 98 ;;
-    -27|-28)     echo 97 ;;
-    -29|-30)     echo 96 ;;
-    -31|-32)     echo 95 ;;
-    -33)         echo 94 ;;
-    -34|-35)     echo 93 ;;
-    -36)         echo 92 ;;
-    -37)         echo 91 ;;
-    -38|-39)     echo 90 ;;
-    -40)         echo 89 ;;
-    -41)         echo 88 ;;
-    -42)         echo 87 ;;
-    -43)         echo 86 ;;
-    -44)         echo 85 ;;
-    -45)         echo 84 ;;
-    -46)         echo 83 ;;
-    -47)         echo 82 ;;
-    -48)         echo 81 ;;
-    -49)         echo 80 ;;
-    -50)         echo 79 ;;
-    -51)         echo 78 ;;
-    -52)         echo 76 ;;
-    -53)         echo 75 ;;
-    -54)         echo 74 ;;
-    -55)         echo 73 ;;
-    -56)         echo 71 ;;
-    -57)         echo 70 ;;
-    -58)         echo 69 ;;
-    -59)         echo 67 ;;
-    -60)         echo 66 ;;
-    -61)         echo 64 ;;
-    -62)         echo 63 ;;
-    -63)         echo 61 ;;
-    -64)         echo 60 ;;
-    -65)         echo 58 ;;
-    -66)         echo 56 ;;
-    -67)         echo 55 ;;
-    -68)         echo 53 ;;
-    -69)         echo 51 ;;
-    -70)         echo 50 ;;
-    -71)         echo 48 ;;
-    -72)         echo 46 ;;
-    -73)         echo 44 ;;
-    -74)         echo 42 ;;
-    -75)         echo 40 ;;
-    -76)         echo 38 ;;
-    -77)         echo 36 ;;
-    -78)         echo 34 ;;
-    -79)         echo 32 ;;
-    -80)         echo 30 ;;
-    -81)         echo 28 ;;
-    -82)         echo 26 ;;
-    -83)         echo 24 ;;
-    -84)         echo 22 ;;
-    -85)         echo 20 ;;
-    -86)         echo 17 ;;
-    -87)         echo 15 ;;
-    -88)         echo 13 ;;
-    -89)         echo 10 ;;
-    -90)         echo 8 ;;
-    -91)         echo 6 ;;
-    -92)         echo 3 ;;
-    *)           echo 1 ;;
+    -21|-22|-23) return 99 ;;
+    -24|-25|-26) return 98 ;;
+    -27|-28)     return 97 ;;
+    -29|-30)     return 96 ;;
+    -31|-32)     return 95 ;;
+    -33)         return 94 ;;
+    -34|-35)     return 93 ;;
+    -36)         return 92 ;;
+    -37)         return 91 ;;
+    -38|-39)     return 90 ;;
+    -40)         return 89 ;;
+    -41)         return 88 ;;
+    -42)         return 87 ;;
+    -43)         return 86 ;;
+    -44)         return 85 ;;
+    -45)         return 84 ;;
+    -46)         return 83 ;;
+    -47)         return 82 ;;
+    -48)         return 81 ;;
+    -49)         return 80 ;;
+    -50)         return 79 ;;
+    -51)         return 78 ;;
+    -52)         return 76 ;;
+    -53)         return 75 ;;
+    -54)         return 74 ;;
+    -55)         return 73 ;;
+    -56)         return 71 ;;
+    -57)         return 70 ;;
+    -58)         return 69 ;;
+    -59)         return 67 ;;
+    -60)         return 66 ;;
+    -61)         return 64 ;;
+    -62)         return 63 ;;
+    -63)         return 61 ;;
+    -64)         return 60 ;;
+    -65)         return 58 ;;
+    -66)         return 56 ;;
+    -67)         return 55 ;;
+    -68)         return 53 ;;
+    -69)         return 51 ;;
+    -70)         return 50 ;;
+    -71)         return 48 ;;
+    -72)         return 46 ;;
+    -73)         return 44 ;;
+    -74)         return 42 ;;
+    -75)         return 40 ;;
+    -76)         return 38 ;;
+    -77)         return 36 ;;
+    -78)         return 34 ;;
+    -79)         return 32 ;;
+    -80)         return 30 ;;
+    -81)         return 28 ;;
+    -82)         return 26 ;;
+    -83)         return 24 ;;
+    -84)         return 22 ;;
+    -85)         return 20 ;;
+    -86)         return 17 ;;
+    -87)         return 15 ;;
+    -88)         return 13 ;;
+    -89)         return 10 ;;
+    -90)         return 8 ;;
+    -91)         return 6 ;;
+    -92)         return 3 ;;
+    *)           return 1 ;;
   esac
 }
 
@@ -115,12 +115,16 @@ signal_strength() {
     if [[ "$line" =~ [[:space:]]+"signal:" ]]; then
       read -ra line_components <<<"$line"
       dbm_to_percent "${line_components[1]}"
+      return "$?"
     fi
   done
+  echo "[wifi-signal-strength] Sorry, signal data missing" >&2
+  exit 1
 }
 
 main() {
   signal_strength
+  echo "$?"
 }
 
 main
