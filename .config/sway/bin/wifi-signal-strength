@@ -5,7 +5,11 @@
 #|
 #| Credit: L<https://forum.openwrt.org/t/iw-dev-station-dump-interpretation/31890/2>
 #|
-#| Could also be accomplished with C<wpa_cli>. See: L<https://stackoverflow.com/questions/19742162/obtaining-received-signal-strength-of-neighboring-devices>
+#| Could also be accomplished with I<wpa_supplicant> or I<iwd> (see:
+#| L<wpa_cli|https://stackoverflow.com/questions/19742162/obtaining-received-signal-strength-of-neighboring-devices>, L<iwctl|https://www.reddit.com/r/archlinux/comments/gbx3sf/iwd_users_how_do_i_get_connected_channel_strength/>).
+#| N.B. Unlike an I<iw>-based design (as implemented here), these
+#| alternatives would be tied to I<wpa_supplicant> and I<iwd>,
+#| respectively.
 #|
 #| C<iwlist> from L<wireless_tools|https://hpl.hp.com/personal/Jean_Tourrilhes/Linux/Tools.html#latest>
 #| could also be made to work, however upstream hasn't shipped a new
