@@ -15,14 +15,18 @@ configure swaybar (see: `man 5 sway-bar`)
   - "cpu: <cpu temperature>°C"
   - "vol: <volume percentage>%"
   - "bat: <battery percentage>%"
-  - internet
-    - if ethernet
-      - "eth: <ssid>"
-    - if wifi
-      - "wifi: <signal strength percentage>% <ssid>"
+  - network
+    - if internet connectivity
+      - if ethernet [2]
+        - "net: <ssid> <ethernet icon>"
+      - else if wifi
+        - "net: <ssid> ᯤ <signal strength percentage>%"
+    - else if no internet connectivity
+      - "net: disconnected"
   - "<date time>"
 
 
 ******************************************************************************
 
 [1]: https://git.sr.ht/~palb91/sway-man-inhibit
+[2]: https://stackoverflow.com/questions/28590874/determine-if-connection-is-wired-or-wireless
