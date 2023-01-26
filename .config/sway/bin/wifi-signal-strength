@@ -1,7 +1,7 @@
 #!/usr/bin/env raku
 
-#| C<$OUT> contains example output from C<iw dev station dump>. It exists
-#| for development purposes only.
+#| C<$OUTPUT> contains example output from C<iw dev station dump>. It
+#} exists for development purposes only.
 #|
 #| Credit: L<https://forum.openwrt.org/t/iw-dev-station-dump-interpretation/31890/2>
 #|
@@ -20,7 +20,7 @@
 #|      my $iw-dev-station-dump-output = qx{iw dev station dump}.trim;
 #|
 #| TODO: Port to {pac,tty,void,xorg}files, place in C<$HOME/.bin>.
-constant $OUT = q:to/EOF/;
+constant $OUTPUT = q:to/EOF/;
 inactive time:	4470 ms
 	rx bytes:	26333626454
 	rx packets:	18541754
@@ -124,7 +124,7 @@ sub signal-strength(--> UInt:D)
     # As much as I'd like to put each '.' method on its own line for
     # readability, raku-2022.12 won't compile it if I do.
     my UInt:D $signal-strength =
-        $OUT.lines.first(/\h+'signal:'/).split(/\h+/)[2].Int.&dbm-to-percent;
+        $OUTPUT.lines.first(/\h+'signal:'/).split(/\h+/)[2].Int.&dbm-to-percent;
 }
 
 sub MAIN(--> Nil)
