@@ -1,20 +1,15 @@
-set $mode_recording "<span foreground='$base0A'>雷</span> \
-<span foreground='$base05'><b>Screen</b></span> <span foreground='$base0A'>(<b>w</b>)</span> \
-<span foreground='$base01'>—</span> \
-<span foreground='$base05'><b>Screen (+ Mic)</b></span> <span foreground='$base0A'>(<b>Shift+w</b>)</span> \
-<span foreground='$base01'>—</span> \
-<span foreground='$base05'><b>Region</b></span> <span foreground='$base0A'>(<b>r</b>)</span> \
-<span foreground='$base01'>—</span> \
-<span foreground='$base05'><b>Region (+ Mic)</b></span> <span foreground='$base0A'>(<b>Shift+r</b>)</span>"
+set $mode_recording "🎥 [f]ull screen [w]indow"
+set $mode_recording_on "🎬 Press ESC to end recording"
 
-set $mode_recording_on "<span foreground='$base0A'>壘</span> \
-<span foreground='$base05'><b>Exit</b></span> <span foreground='$base0A'>(<b>ESC</b>)</span>"
+mode $mode_recording {
+  # record whole screen without audio
+  bindsym f exec killall -s SIGINT wf-recorder \
+    || wf-recorder --audio=0 --geometry "$(slurp -d)" -f $screenrec_file, mode $mode_recording_on
 
-mode --pango_markup $mode_recording_on {
-  bindsym Escape exec killall -s SIGINT wf-recorder, mode "default"
-}
+  # record whole screen with audio
+  bindsym Shift+f exec killall -s SIGINT wf-recorder \
+    || wf-recorder --audio --geometry "$(slurp -d)" -f $screenrec_file, mode $mode_recording_on
 
-mode --pango_markup $mode_recording {
   # record focused window without audio
   bindsym w exec killall -s SIGINT wf-recorder \
     || wf-recorder --audio=0 --output $(swaymsg --type get_outputs | jq --raw-output '.[] | select(.focused) | .name') -f $screenrec_file, mode $mode_recording_on
@@ -23,17 +18,12 @@ mode --pango_markup $mode_recording {
   bindsym Shift+w exec killall -s SIGINT wf-recorder \
     || wf-recorder --audio --output $(swaymsg --type get_outputs | jq --raw-output '.[] | select(.focused) | .name') -f $screenrec_file, mode $mode_recording_on
 
-  # record whole screen without audio
-  bindsym r exec killall -s SIGINT wf-recorder \
-    || wf-recorder --audio=0 --geometry "$(slurp -d)" -f $screenrec_file, mode $mode_recording_on
-
-  # record whole screen with audio
-  bindsym Shift+r exec killall -s SIGINT wf-recorder \
-    || wf-recorder --audio --geometry "$(slurp -d)" -f $screenrec_file, mode $mode_recording_on
-
   # return to default mode
   bindsym Escape mode "default"
-  bindsym Return mode "default"
+}
+
+mode $mode_recording_on {
+  bindsym Escape exec killall -s SIGINT wf-recorder, mode "default"
 }
 
 # launch recording mode

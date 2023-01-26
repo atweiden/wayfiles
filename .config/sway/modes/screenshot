@@ -1,26 +1,25 @@
-set $mode_screenshot "<span foreground='$base0A'></span> \
-<span foreground='$base05'><b>Fullscreen</b></span> <span foreground='$base0A'>(<b>f</b>)</span> \
-<span foreground='$base01'>—</span> \
-<span foreground='$base05'><b>Window</b></span> <span foreground='$base0A'>(<b>w</b>)</span> \
-<span foreground='$base01'>—</span> \
-<span foreground='$base05'><b>Region</b></span> <span foreground='$base0A'>(<b>r</b>)</span>"
+set $mode_screenshot "📷 [f]ull screen [w]indow a[r]ea [e]dit"
 
-mode --pango_markup $mode_screenshot {
-  # capture whole screen
-  bindsym f exec grimshot --notify copy screen, mode "default"
-  bindsym Shift+f exec grimshot --notify save screen $screenshot_file, mode "default"
+mode $mode_screenshot {
+  bindsym {
+    # capture whole screen
+    f exec grimshot --notify copy screen, mode "default"
+    Shift+f exec grimshot --notify save screen $screenshot_file, mode "default"
 
-  # capture focused window
-  bindsym w exec grimshot --notify copy win, mode "default"
-  bindsym Shift+w exec grimshot --notify save win $screenshot_file, mode "default"
+    # capture focused window
+    w exec grimshot --notify copy win, mode "default"
+    Shift+w exec grimshot --notify save win $screenshot_file, mode "default"
 
-  # capture selected area
-  bindsym r exec grimshot --notify copy area, mode "default"
-  bindsym Shift+r exec grimshot --notify save area $screenshot_file, mode "default"
+    # capture selected area
+    r exec grimshot --notify copy area, mode "default"
+    Shift+r exec grimshot --notify save area $screenshot_file, mode "default"
 
-  # return to default mode
-  bindsym Escape mode "default"
-  bindsym Return mode "default"
+    # edit screenshot
+    e exec swappy --file $screenshot_file
+
+    # return to default mode
+    Escape mode "default"
+  }
 }
 
 # launch screenshot mode

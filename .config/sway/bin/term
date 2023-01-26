@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if [[ "$#" -eq 0 ]]; then
+  # no argument: run tmux
+  set -- tmux
+elif [[ "$#" -eq 1 ]] && [[ "$1" =~ ^"-" ]]; then
+  # allow passing options to foot itself
+  set -- "$1" tmux
+elif [[ "$1" = 'resurrect' ]]; then
+  # resurrect last closed session
+  set -- tmux
+  readarray -t sessions <<<"$(tmux ls)"
+  for id in "${sessions[@]}"; do
+    if [[ "${id##* }" != '(attached)' ]]; then
+      set -- tmux attach-session -t "${id%%:*}"
+      break
+    fi
+  done
+fi
+
+# start server if required
+if ! pgrep -a foot | grep --quiet 'foot \(-s\|--server\)'; then
+  nohup foot --server >/dev/null 2>&1 &
+  sleep 0.5
+fi
+
+exec footclient "$@"
+
+# vim: set filetype=sh foldmethod=marker foldlevel=0 nowrap:

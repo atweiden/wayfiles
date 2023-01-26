@@ -1,0 +1,21 @@
+set $mode_exit "⌬ [e]xit [s]uspend [r]eload [h]ibernate [R]eboot [p]oweroff"
+
+mode $mode_exit {
+  bindsym {
+    e       exit;                     mode default
+    r       reload;                   mode default
+    s       exec systemctl suspend;   mode default
+    h       exec systemctl hibernate; mode default
+    Shift+r exec systemctl reboot;    mode default
+    p       exec systemctl poweroff;  mode default
+
+    q       mode default
+    $esc    mode default
+  }
+}
+
+# launch exit mode
+bindsym $mod+Shift+e mode $mode_exit
+bindsym XF86PowerOff mode $mode_exit
+
+# vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:

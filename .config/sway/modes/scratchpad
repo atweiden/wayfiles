@@ -1,7 +1,0 @@
-# move focused window to scratchpad
-bindsym $mod+Shift+minus move scratchpad
-
-# show next scratchpad window or hide focused one
-bindsym $mod+minus scratchpad show
-
-# vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:

@@ -1,0 +1,10 @@
+bar {
+  # hide bar by default, show with modifier key
+  hidden_state hide
+  mode hide
+  modifier $mod
+  position top
+  swaybar_command $statusbar
+}
+
+# vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:

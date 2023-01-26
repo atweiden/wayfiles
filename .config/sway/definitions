@@ -1,23 +1,28 @@
-set $mod Mod4
-set $alt Mod1
-set $left h
-set $down j
-set $up k
-set $right l
+set {
+  $mod Mod4
+  $alt Mod1
+  $left h
+  $down j
+  $up k
+  $right l
 
-set $lock waylock
-set $locking $lock -fork-on-lock
-set $idle swayidle \
-  timeout 30 'if pgrep $lock; then swaymsg "output * dpms off"; fi' resume 'if pgrep $lock; then swaymsg "output * dpms on"; fi' \
-  timeout 300 'light -G > /tmp/brightness && light -S 10' resume 'light -S $([ -f /tmp/brightness ] && cat /tmp/brightness || echo 100%)' \
-  timeout 420 'exec $locking' \
-  timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-  before-sleep 'exec $locking'
-set $screencap_dir ~/Downloads
-set $screenrec_file $screencap_dir/recording-$(date +'%Y-%m-%d-%H%M%S').mp4
-set $screenshot_file $screencap_dir/screenshot-$(date +'%Y-%m-%d-%H%M%S').png
-set $shutdown wlogout --buttons-per-row 3
-set $statusbar swaybar
-set $theme /etc/sway/themes/seoul256
+  $bin $XDG_CONFIG_HOME/sway/bin
+  $app_idle swayidle -w
+  $app_term $bin/term
+  $app_mixer $app_term --app-id=termfloat ncpamixer
+
+  # launch applications with fzf
+  $menu exec $app_term --app-id=launcher bash -c $bin/fzf-menu
+
+  $screencap_dir $HOME/Downloads
+  $screenrec_file $screencap_dir/recording-$(date +'%Y-%m-%d-%H%M%S').mp4
+  $screenshot_file $screencap_dir/screenshot-$(date +'%Y-%m-%d-%H%M%S').png
+
+  $statusbar swaybar
+
+  $theme /etc/sway/themes/seoul256
+
+  $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
+}
 
 # vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:

@@ -1,3 +1,7 @@
+# switch between workspaces
+bindgesture swipe:left workspace prev
+bindgesture swipe:right workspace next
+
 # launch terminal
 bindsym $mod+Return exec $term
 
@@ -6,9 +10,6 @@ bindsym $mod+space exec $menu
 
 # launch window switcher
 bindsym $mod+Shift+space exec $selwin
-
-# super+lclick to drag window, super+rclick to resize
-floating_modifier $mod normal
 
 # switch between windows
 bindsym $mod+$left focus left
@@ -54,6 +55,12 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
+# move focused window to scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# show next scratchpad window or hide focused one
+bindsym $mod+minus scratchpad show
+
 # split window horizontally/vertically
 bindsym $mod+b splith
 bindsym $mod+v splitv
@@ -79,36 +86,16 @@ bindsym $alt+space focus mode_toggle
 # switch focus to parent window
 bindsym $mod+a focus parent
 
-# launch help
-bindsym $mod+question exec $help
-
-# adjust volume
-bindsym XF86AudioRaiseVolume exec pactl set-sink-mute @DEFAULT_SINK@ no && pactl set-sink-volume @DEFAULT_SINK@ +1%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1%
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-
-# adjust brightness
-bindsym XF86MonBrightnessUp exec light -A 5
-bindsym XF86MonBrightnessDown exec light -U 5
-
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# launch sway exit menu
-bindsym $mod+Shift+e exec $shutdown
-bindsym XF86PowerOff exec $shutdown
+# adjust sound
+bindsym XF86AudioRaiseVolume exec pamixer --unmute --increase 5 && pamixer --get-volume > $WOBSOCK
+bindsym XF86AudioLowerVolume exec pamixer --unmute --decrease 5 && pamixer --get-volume > $WOBSOCK
+bindsym XF86AudioMute exec pamixer --toggle-mute && (pamixer --get-mute && echo 0 > $WOBSOCK) || pamixer --get-volume > $WOBSOCK
 
-# reload sway configuration
-bindsym $mod+Shift+c reload
-
-# use tmux-style dividers rather than gaps/edges
-new_window pixel 1
-new_float pixel 1
-hide_edge_borders both
-
-bar {
-  position top
-  swaybar_command $statusbar
-}
+# adjust brightness
+bindsym XF86MonBrightnessUp exec light -S "$(light -G | awk '{ print int(($1 + .72) * 1.4) }')" && light -G | cut --delimiter='.' --fields=1 > $WOBSOCK
+bindsym XF86MonBrightnessDown exec light -S "$(light -G | awk '{ print int($1 / 1.4) }')" && light -G | cut --delimiter='.' --fields=1 > $WOBSOCK
 
 # vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:

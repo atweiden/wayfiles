@@ -1,45 +1,24 @@
 include $XDG_CONFIG_HOME/sway/definitions
+include $XDG_CONFIG_HOME/sway/bar
+include $XDG_CONFIG_HOME/sway/bindings
 include $XDG_CONFIG_HOME/sway/inputs/*
 include $XDG_CONFIG_HOME/sway/modes/*
 include $XDG_CONFIG_HOME/sway/outputs/*
+include $XDG_CONFIG_HOME/sway/startup
+include $XDG_CONFIG_HOME/sway/views
 
-xwayland enable
-
-bindgesture swipe:right workspace next
-bindgesture swipe:left workspace prev
-
-bindsym XF86AudioRaiseVolume exec pamixer --unmute --increase 5 && pamixer --get-volume > $WOBSOCK
-bindsym XF86AudioLowerVolume exec pamixer --unmute --decrease 5 && pamixer --get-volume > $WOBSOCK
-bindsym XF86AudioMute exec pamixer --toggle-mute && (pamixer --get-mute && echo 0 > $WOBSOCK) || pamixer --get-volume > $WOBSOCK
-bindsym XF86MonBrightnessUp exec light -S "$(light -G | awk '{ print int(($1 + .72) * 1.4) }')" && light -G | cut --delimiter='.' --fields=1 > $WOBSOCK
-bindsym XF86MonBrightnessDown exec light -S "$(light -G | awk '{ print int($1 / 1.4) }')" && light -G | cut --delimiter='.' --fields=1 > $WOBSOCK
+# super+lclick to drag window, super+rclick to resize
+floating_modifier $mod normal
 
 focus_follows_mouse yes
 focus_on_window_activation smart
 focus_wrapping no
 
-set $bin $XDG_CONFIG_HOME/sway/bin
-set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
+# use tmux-style dividers rather than gaps/edges
+hide_edge_borders both
+new_float pixel 1
+new_window pixel 1
 
-# launch applications with fzf
-set $menu exec $term --app-id=launcher bash -c $bin/fzf-menu
-for_window [app_id="^launcher$"] floating enable, border none, opacity 0.8
-
-bar {
-  # hide bar by default, show with modifier key
-  hidden_state hide
-  mode hide
-  modifier $mod
-  position top
-  swaybar_command $statusbar
-}
-
-# set DISPLAY/WAYLAND_DISPLAY in systemd user environment, see: FS#63021
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY WOBSOCK
-exec hash dbus-update-activation-environment 2>/dev/null \
-  && dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY WOBSOCK
-
-exec mkfifo $WOBSOCK && tail --follow=$WOBSOCK | wob
-exec_always $idle
+xwayland enable
 
 # vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:
