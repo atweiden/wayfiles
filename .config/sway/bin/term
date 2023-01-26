@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# -----------------------------------------------------------------------------
+# term: launch foot and tmux, starting foot server as needed
+#
+# Credit: https://git.sr.ht/~palb91/dotfiles
+# -----------------------------------------------------------------------------
+
 if [[ "$#" -eq 0 ]]; then
   # no argument: run tmux
   set -- tmux
