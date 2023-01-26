@@ -3,11 +3,19 @@
 #| C<$OUT> contains example output from C<iw dev station dump>. It exists
 #| for development purposes only.
 #|
+#| Credit: L<https://forum.openwrt.org/t/iw-dev-station-dump-interpretation/31890/2>
+#|
+#| Could also be accomplished with C<wpa_cli>. See: L<https://stackoverflow.com/questions/19742162/obtaining-received-signal-strength-of-neighboring-devices>
+#|
+#| C<iwlist> from L<wireless_tools|https://hpl.hp.com/personal/Jean_Tourrilhes/Linux/Tools.html#latest>
+#| could also be made to work, however upstream hasn't shipped a new
+#| version in over 10 years.
+#|
 #| TODO: Remove this after concluding development, e.g.
 #|
 #|      my $iw-dev-station-dump-output = qx{iw dev station dump}.trim;
 #|
-#| Credit: L<https://forum.openwrt.org/t/iw-dev-station-dump-interpretation/31890/2>
+#| TODO: Port to {pac,tty,void,xorg}files, place in C<$HOME/.bin>.
 constant $OUT = q:to/EOF/;
 inactive time:	4470 ms
 	rx bytes:	26333626454
