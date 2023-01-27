@@ -5,8 +5,8 @@ vt = 1
 command = '''
 tuigreet \
   --cmd sway \
-  --power-reboot 'sudo systemctl reboot' \
-  --power-shutdown 'sudo systemctl poweroff' \
+  --power-reboot 'systemctl reboot' \
+  --power-shutdown 'systemctl poweroff -i' \
   --remember \
   --time \
   --user-menu \

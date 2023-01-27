@@ -1,101 +1,114 @@
-# switch between workspaces
-bindgesture swipe:left workspace prev
-bindgesture swipe:right workspace next
+bindgesture {
+  # switch to previous workspace
+  swipe:left workspace prev
+  # switch to next workspace
+  swipe:right workspace next
+}
 
-# launch terminal
-bindsym $mod+Return exec $term
+bindsym {
+  # launch terminal
+  $mod+Return exec $term
 
-# launch application launcher
-bindsym $mod+space exec $menu
+  # launch application launcher
+  $mod+space exec $menu
 
-# launch window switcher
-bindsym $mod+Shift+space exec $selwin
+  # launch window switcher
+  $mod+Shift+space exec $selwin
 
-# switch between windows
-bindsym $mod+$left focus left
-bindsym $mod+$down focus down
-bindsym $mod+$up focus up
-bindsym $mod+$right focus right
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+  # switch between windows
+  $mod+$left focus left
+  $mod+$down focus down
+  $mod+$up focus up
+  $mod+$right focus right
+  $mod+Left focus left
+  $mod+Down focus down
+  $mod+Up focus up
+  $mod+Right focus right
 
-# move focused window around current workspace
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+  # move focused window around current workspace
+  $mod+Shift+$left move left
+  $mod+Shift+$down move down
+  $mod+Shift+$up move up
+  $mod+Shift+$right move right
+  $mod+Shift+Left move left
+  $mod+Shift+Down move down
+  $mod+Shift+Up move up
+  $mod+Shift+Right move right
 
-# switch between workspaces
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+  # switch between workspaces
+  $mod+1 workspace 1
+  $mod+2 workspace 2
+  $mod+3 workspace 3
+  $mod+4 workspace 4
+  $mod+5 workspace 5
+  $mod+6 workspace 6
+  $mod+7 workspace 7
+  $mod+8 workspace 8
+  $mod+9 workspace 9
+  $mod+0 workspace 10
 
-# move focused window between workspaces
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+  # move focused window between workspaces
+  $mod+Shift+1 move container to workspace 1
+  $mod+Shift+2 move container to workspace 2
+  $mod+Shift+3 move container to workspace 3
+  $mod+Shift+4 move container to workspace 4
+  $mod+Shift+5 move container to workspace 5
+  $mod+Shift+6 move container to workspace 6
+  $mod+Shift+7 move container to workspace 7
+  $mod+Shift+8 move container to workspace 8
+  $mod+Shift+9 move container to workspace 9
+  $mod+Shift+0 move container to workspace 10
 
-# move focused window to scratchpad
-bindsym $mod+Shift+minus move scratchpad
+  # move focused window to scratchpad
+  $mod+Shift+minus move scratchpad
 
-# show next scratchpad window or hide focused one
-bindsym $mod+minus scratchpad show
+  # show next scratchpad window or hide focused one
+  $mod+minus scratchpad show
 
-# split window horizontally/vertically
-bindsym $mod+b splith
-bindsym $mod+v splitv
+  # split window horizontally/vertically
+  $mod+b splith
+  $mod+v splitv
 
-# toggle split window
-bindsym $mod+e layout toggle split
+  # toggle split window
+  $mod+e layout toggle split
 
-# switch to stacked window layout
-bindsym $mod+s layout stacking
+  # switch to stacked window layout
+  $mod+s layout stacking
 
-# switch to tabbed window layout
-bindsym $mod+t layout tabbed
+  # switch to tabbed window layout
+  $mod+t layout tabbed
 
-# toggle focused window fullscreen
-bindsym $mod+f fullscreen
+  # toggle focused window fullscreen
+  $mod+f fullscreen
 
-# toggle focused window floating
-bindsym $alt+Shift+space floating toggle
+  # toggle focused window floating
+  $alt+Shift+space floating toggle
 
-# switch focus between tiling area and floating area
-bindsym $alt+space focus mode_toggle
+  # switch focus between tiling area and floating area
+  $alt+space focus mode_toggle
 
-# switch focus to parent window
-bindsym $mod+a focus parent
+  # switch focus to parent window
+  $mod+a focus parent
 
-# kill focused window
-bindsym $mod+Shift+q kill
+  # kill focused window
+  $mod+Shift+q kill
 
-# adjust sound
-bindsym XF86AudioRaiseVolume exec pamixer --unmute --increase 5 && pamixer --get-volume > $WOBSOCK
-bindsym XF86AudioLowerVolume exec pamixer --unmute --decrease 5 && pamixer --get-volume > $WOBSOCK
-bindsym XF86AudioMute exec pamixer --toggle-mute && (pamixer --get-mute && echo 0 > $WOBSOCK) || pamixer --get-volume > $WOBSOCK
+  # adjust sound
+  XF86AudioRaiseVolume exec pamixer --unmute --increase 5 && pamixer --get-volume > $WOBSOCK
+  XF86AudioLowerVolume exec pamixer --unmute --decrease 5 && pamixer --get-volume > $WOBSOCK
+  XF86AudioMute exec pamixer --toggle-mute && (pamixer --get-mute && echo 0 > $WOBSOCK) || pamixer --get-volume > $WOBSOCK
 
-# adjust brightness
-bindsym XF86MonBrightnessUp exec light -S "$(light -G | awk '{ print int(($1 + .72) * 1.4) }')" && light -G | cut --delimiter='.' --fields=1 > $WOBSOCK
-bindsym XF86MonBrightnessDown exec light -S "$(light -G | awk '{ print int($1 / 1.4) }')" && light -G | cut --delimiter='.' --fields=1 > $WOBSOCK
+  # adjust brightness
+  XF86MonBrightnessUp exec light -S "$(light -G | awk '{ print int(($1 + .72) * 1.4) }')" && light -G | cut --delimiter='.' --fields=1 > $WOBSOCK
+  XF86MonBrightnessDown exec light -S "$(light -G | awk '{ print int($1 / 1.4) }')" && light -G | cut --delimiter='.' --fields=1 > $WOBSOCK
+
+  # prevent changing tabs by scrolling mousewheel
+  # disable vertical scrolling
+  button4 nop
+  button5 nop
+  # disable horizontal scrolling
+  button6 nop
+  button7 nop
+}
 
 # vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:

@@ -25,6 +25,20 @@ configure swaybar (see: `man 5 sway-bar`)
       - "net: disconnected"
   - "<date time>"
 
+shoe
+- decide whether to do tmux reattach from there or bashrc
+  - |     if [ $WAYLAND_DISPLAY ] || [ $DISPLAY ]; then
+    |         if [ -z "$TMUX" ]; then
+    |             ID="$(tmux ls | grep -vm1 attached | cut -d: -f1)"
+    |             if [ -z "$ID" ]; then
+    |                 tmux new-session
+    |             else
+    |                 tmux attach-session -t "$ID"
+    |             fi
+    |         fi
+    |     fi
+    - https://github.com/sblumentritt/settei/blob/dev/shared/config/.bashrc
+
 
 ******************************************************************************
 

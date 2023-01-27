@@ -1,3 +1,6 @@
+[[ -r "$HOME/.bashrc" ]] \
+  && source "$HOME/.bashrc"
+
 # configure clutter for wayland
 export CLUTTER_BACKEND="wayland"
 
@@ -32,7 +35,26 @@ export XDG_CURRENT_DESKTOP="sway"
 export XDG_SESSION_DESKTOP="sway"
 export XDG_SESSION_TYPE="wayland"
 
-[[ -r "$HOME/.bashrc" ]] \
-  && source "$HOME/.bashrc"
+# configure gtk3 manually for wayland since most values aren't read from
+# config file; config file needs to be available for applications which
+# still use it
+gtkcfg="$XDG_CONFIG_HOME/gtk-3.0/settings.ini"
+if [[ -f "$gtkcfg" ]]; then
+  gnome_interface_schema="org.gnome.desktop.interface"
+  # parse some entries from settings to avoid manual updates
+  gtk_theme="$(grep 'gtk-theme-name' "$gtkcfg" | sed 's/.*\s*=\s*//')"
+  icon_theme="$(grep 'gtk-icon-theme-name' "$gtkcfg" | sed 's/.*\s*=\s*//')"
+  cursor_theme="$(grep 'gtk-cursor-theme-name' "$gtkcfg" | sed 's/.*\s*=\s*//')"
+  font_name="$(grep 'gtk-font-name' "$gtkcfg" | sed 's/.*\s*=\s*//')"
+  # configure settings via interface
+  gsettings set "$gnome_interface_schema" gtk-theme "$gtk_theme"
+  gsettings set "$gnome_interface_schema" icon-theme "$icon_theme"
+  gsettings set "$gnome_interface_schema" cursor-theme "$cursor_theme"
+  gsettings set "$gnome_interface_schema" font-name "$font_name"
+  # some settings which can't be parsed from settings file
+  gsettings set $gnome_interface_schema monospace-font-name "MonoLisa 10"
+  gsettings set $gnome_interface_schema toolbar-style "text"
+  gsettings set $gnome_interface_schema toolbar-icons-size "small"
+fi
 
 # vim: set filetype=sh foldmethod=marker foldlevel=0 nowrap:

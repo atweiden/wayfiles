@@ -6,6 +6,21 @@ set {
   $up k
   $right l
 
+  # susumu by sblumentritt/settei
+  $special      #303030
+  $background   #3b3b3b
+  $foreground   #f7e2d0
+  $dark_gray    #454545
+  $red          #f98e79
+  $green        #c6bb8d
+  $orange       #f3b785
+  $blue         #a6b4ad
+  $magenta      #e3a8a4
+  $cyan         #acbcac
+  $bright_white #e5dbd0
+  $gray         #998f85
+  $yellow       #e8bf8d
+
   $bin $XDG_CONFIG_HOME/sway/bin
 
   $app_idle swayidle -w

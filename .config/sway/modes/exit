@@ -1,17 +1,17 @@
-set $mode_exit "⌬ [e]xit [s]uspend [r]eload [h]ibernate [R]eboot [p]oweroff"
+set $mode_exit "⌬ [l]ock [e]xit [s]uspend [r]eload [h]ibernate [R]eboot [S]hutdown"
 
 mode $mode_exit {
-  bindsym {
-    e       exit;                     mode default
-    r       reload;                   mode default
-    s       exec systemctl suspend;   mode default
-    h       exec systemctl hibernate; mode default
-    Shift+r exec systemctl reboot;    mode default
-    p       exec systemctl poweroff;  mode default
-
-    q       mode default
-    $esc    mode default
-  }
+    bindsym {
+      l exec waylock -fork-on-lock, mode "default"
+      e exec swaymsg exit, mode "default"
+      s exec systemctl suspend-then-hibernate, mode "default"
+      r reload, mode "default"
+      h exec systemctl hibernate, mode "default"
+      Shift+r exec systemctl reboot, mode "default"
+      Shift+s exec systemctl poweroff -i, mode "default"
+      Escape mode "default"
+      q mode "default"
+    }
 }
 
 # launch exit mode
