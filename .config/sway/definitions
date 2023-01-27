@@ -28,7 +28,7 @@ set {
   $app_mixer $app_term --app-id=termfloat ncpamixer
 
   # launch applications with fzf
-  $menu exec $app_term --app-id=launcher bash -c $bin/fzf-menu
+  $app_menu exec $app_term --app-id=launcher bash -c $bin/fzf-menu
 
   $screencap_dir $HOME/Downloads
   $screenrec_file $screencap_dir/recording-$(date +'%Y-%m-%d-%H%M%S').mp4

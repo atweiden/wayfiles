@@ -7,10 +7,13 @@ bindgesture {
 
 bindsym {
   # launch terminal
-  $mod+Return exec $term
+  $mod+Return exec $app_term
+
+  # launch terminal, attaching to existing tmux session if available
+  $mod+Shift+Return exec $app_term resurrect
 
   # launch application launcher
-  $mod+space exec $menu
+  $mod+space exec $app_menu
 
   # launch window switcher
   $mod+Shift+space exec $selwin
