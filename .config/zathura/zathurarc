@@ -1,0 +1,11 @@
+# set font
+set font "MonoLisa 12"
+
+# display status bar
+set guioptions "s"
+
+# enable copy to clipboard
+set selection-clipboard "clipboard"
+
+# replace $HOME with ~ in status bar
+set statusbar-home-tilde "true"
