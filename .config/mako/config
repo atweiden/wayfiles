@@ -31,3 +31,10 @@ text-color=#f7e2d0
 [urgency=high]
 text-color=#f3b785
 default-timeout=0
+
+# hide all notifications if "do-not-disturb" mode is enabled
+#
+# hide notifications: makoctl mode -a do-not-disturb
+# show notifications: makoctl mode -r do-not-disturb
+[mode=do-not-disturb]
+invisible=1

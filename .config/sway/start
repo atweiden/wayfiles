@@ -9,7 +9,7 @@ exec mako
 
 exec mkfifo $WOBSOCK && tail --follow=$WOBSOCK | wob
 
-exec wlsunset -l $LATITUDE -L $LONGITUDE
+exec $bin/wlsunset-with-config
 
 # open terminal on startup
 exec swaymsg 'workspace $ws1; exec $app_term'

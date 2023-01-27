@@ -23,6 +23,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 # configure qt for wayland/sway
 export QT_QPA_PLATFORM="wayland;xcb"
+export QT_QPA_PLATFORMTHEME="qt5ct"
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 
 # configure sdl for wayland
@@ -63,9 +64,5 @@ if [[ -f "$gtkcfg" ]]; then
 fi
 
 # end gtk }}}
-
-# gps coordinates for gold coast qld day/night gamma correction
-export $LATITUDE=-28
-export $LONGITUDE=153.4
 
 # vim: set filetype=sh foldmethod=marker foldlevel=0 nowrap:
