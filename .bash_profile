@@ -1,6 +1,8 @@
 [[ -r "$HOME/.bashrc" ]] \
   && source "$HOME/.bashrc"
 
+# wayland {{{
+
 # configure clutter for wayland
 export CLUTTER_BACKEND="wayland"
 
@@ -35,6 +37,9 @@ export XDG_CURRENT_DESKTOP="sway"
 export XDG_SESSION_DESKTOP="sway"
 export XDG_SESSION_TYPE="wayland"
 
+# end wayland }}}
+# gtk {{{
+
 # configure gtk3 manually for wayland since most values aren't read from
 # config file; config file needs to be available for applications which
 # still use it
@@ -56,5 +61,11 @@ if [[ -f "$gtkcfg" ]]; then
   gsettings set $gnome_interface_schema toolbar-style "text"
   gsettings set $gnome_interface_schema toolbar-icons-size "small"
 fi
+
+# end gtk }}}
+
+# gps coordinates for gold coast qld day/night gamma correction
+export $LATITUDE=-28
+export $LONGITUDE=153.4
 
 # vim: set filetype=sh foldmethod=marker foldlevel=0 nowrap:

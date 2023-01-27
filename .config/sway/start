@@ -5,7 +5,11 @@ exec hash dbus-update-activation-environment 2>/dev/null \
 
 exec_always $app_idle
 
+exec mako
+
 exec mkfifo $WOBSOCK && tail --follow=$WOBSOCK | wob
+
+exec wlsunset -l $LATITUDE -L $LONGITUDE
 
 # open terminal on startup
 exec swaymsg 'workspace $ws1; exec $app_term'

@@ -19,6 +19,7 @@ mode $mode_screenshot {
 
     # return to default mode
     Escape mode "default"
+    q mode "default"
   }
 }
 

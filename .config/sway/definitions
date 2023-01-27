@@ -34,10 +34,6 @@ set {
   $screenrec_file $screencap_dir/recording-$(date +'%Y-%m-%d-%H%M%S').mp4
   $screenshot_file $screencap_dir/screenshot-$(date +'%Y-%m-%d-%H%M%S').png
 
-  $statusbar swaybar
-
-  $theme $XDG_CONFIG_HOME/sway/themes/seoul256
-
   $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 }
 

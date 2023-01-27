@@ -7,6 +7,10 @@ for_window {
   [window_type="notification"]       floating enable sticky enable
   [window_role="pop-up"]             floating enable sticky enable
   [window_role="task_dialog"]        floating enable sticky enable
+
+  # inhibit_idle if there are windows in fullscreen mode
+  [app_id=".*"] inhibit_idle fullscreen
+  [class=".*"] inhibit_idle fullscreen
 }
 
 # vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:

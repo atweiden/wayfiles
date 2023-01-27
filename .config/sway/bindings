@@ -6,18 +6,6 @@ bindgesture {
 }
 
 bindsym {
-  # launch terminal
-  $mod+Return exec $app_term
-
-  # launch terminal, attaching to existing tmux session if available
-  $mod+Shift+Return exec $app_term resurrect
-
-  # launch application launcher
-  $mod+space exec $app_menu
-
-  # launch window switcher
-  $mod+Shift+space exec $selwin
-
   # switch between windows
   $mod+$left focus left
   $mod+$down focus down
@@ -96,6 +84,14 @@ bindsym {
   # kill focused window
   $mod+Shift+q kill
 
+  # prevent changing tabs by scrolling mousewheel
+  # disable vertical scrolling
+  button4 nop
+  button5 nop
+  # disable horizontal scrolling
+  button6 nop
+  button7 nop
+
   # adjust sound
   XF86AudioRaiseVolume exec pamixer --unmute --increase 5 && pamixer --get-volume > $WOBSOCK
   XF86AudioLowerVolume exec pamixer --unmute --decrease 5 && pamixer --get-volume > $WOBSOCK
@@ -105,13 +101,19 @@ bindsym {
   XF86MonBrightnessUp exec light -S "$(light -G | awk '{ print int(($1 + .72) * 1.4) }')" && light -G | cut --delimiter='.' --fields=1 > $WOBSOCK
   XF86MonBrightnessDown exec light -S "$(light -G | awk '{ print int($1 / 1.4) }')" && light -G | cut --delimiter='.' --fields=1 > $WOBSOCK
 
-  # prevent changing tabs by scrolling mousewheel
-  # disable vertical scrolling
-  button4 nop
-  button5 nop
-  # disable horizontal scrolling
-  button6 nop
-  button7 nop
+  # launch terminal
+  $mod+Return exec $app_term
+
+  # launch terminal, attaching to existing tmux session if available
+  $mod+Shift+Return exec $app_term resurrect
+
+  # launch application launcher
+  $mod+space exec $app_menu
+
+  # manage notifications
+  $mod+Delete makoctl dismiss --all
+  $mod+BackSpace exec makoctl dismiss
+  $mod+Shift+BackSpace exec makoctl restore
 }
 
 # vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:

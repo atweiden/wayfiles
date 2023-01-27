@@ -1,21 +1,38 @@
 set $mode_exit "⌬ [l]ock [e]xit [s]uspend [r]eload [h]ibernate [R]eboot [S]hutdown"
 
 mode $mode_exit {
-    bindsym {
-      l exec waylock -fork-on-lock, mode "default"
-      e exec swaymsg exit, mode "default"
-      s exec systemctl suspend-then-hibernate, mode "default"
-      r reload, mode "default"
-      h exec systemctl hibernate, mode "default"
-      Shift+r exec systemctl reboot, mode "default"
-      Shift+s exec systemctl poweroff -i, mode "default"
-      Escape mode "default"
-      q mode "default"
-    }
+  bindsym {
+    # lock screen
+    l exec waylock -fork-on-lock, mode "default"
+
+    # exit sway
+    e exec swaymsg exit, mode "default"
+
+    # suspend
+    s exec systemctl suspend-then-hibernate, mode "default"
+
+    # reload sway config
+    r reload, mode "default"
+
+    # hibernate
+    h exec systemctl hibernate, mode "default"
+
+    # reboot
+    Shift+r exec systemctl reboot, mode "default"
+
+    # shutdown
+    Shift+s exec systemctl poweroff -i, mode "default"
+
+    # return to default mode
+    Escape mode "default"
+    q mode "default"
+  }
 }
 
 # launch exit mode
-bindsym $mod+Shift+e mode $mode_exit
-bindsym XF86PowerOff mode $mode_exit
+bindsym {
+  $mod+Shift+e mode $mode_exit
+  XF86PowerOff mode $mode_exit
+}
 
 # vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:
