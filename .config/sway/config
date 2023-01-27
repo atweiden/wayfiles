@@ -1,10 +1,10 @@
 include $XDG_CONFIG_HOME/sway/definitions
-include $XDG_CONFIG_HOME/sway/bar
 include $XDG_CONFIG_HOME/sway/bindings
 include $XDG_CONFIG_HOME/sway/inputs/*
 include $XDG_CONFIG_HOME/sway/modes/*
 include $XDG_CONFIG_HOME/sway/outputs/*
-include $XDG_CONFIG_HOME/sway/startup
+include $XDG_CONFIG_HOME/sway/start
+include $XDG_CONFIG_HOME/sway/style
 include $XDG_CONFIG_HOME/sway/views
 
 # super+lclick to drag window, super+rclick to resize
