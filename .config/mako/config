@@ -38,3 +38,5 @@ default-timeout=0
 # show notifications: makoctl mode -r do-not-disturb
 [mode=do-not-disturb]
 invisible=1
+
+# vim: set filetype=dosini foldmethod=marker foldlevel=0 nowrap:

@@ -1,4 +1,8 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
+# -----------------------------------------------------------------------------
+# wifi-signal-strength: measure wifi signal strength
+# -----------------------------------------------------------------------------
 
 # OUT contains example output from `iw dev station dump`. It exists for
 # development purposes only.

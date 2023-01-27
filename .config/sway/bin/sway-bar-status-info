@@ -1,6 +1,10 @@
 #!/usr/bin/env sh
 
-# Source: https://github.com/sblumentritt/settei
+# -----------------------------------------------------------------------------
+# sway-bar-status-info: populate sway-bar
+#
+# Credit: https://github.com/sblumentritt/settei
+# -----------------------------------------------------------------------------
 
 music_info() {
     local symbol=""
@@ -116,4 +120,6 @@ main() {
     done
 }
 
-main 2> /tmp/statusinfo.log
+main 2> "$XDG_RUNTIME_DIR/statusinfo.log"
+
+# vim: set filetype=sh foldmethod=marker foldlevel=0 nowrap:

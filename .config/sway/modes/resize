@@ -1,4 +1,4 @@
-set $mode_resize "resize [h/j/k/l], increase gaps [+], decrease gaps [-]"
+set $mode_resize "⌥ resize [h/j/k/l], increase gaps [+], decrease gaps [-]"
 
 mode $mode_resize {
   bindsym {
