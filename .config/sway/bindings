@@ -115,8 +115,11 @@ bindsym {
   # launch application launcher
   $mod+space exec $app_menu
 
+  # launch music player
+  $mod+m exec $app_music
+
   # launch audio controls
-  $mod+m exec $app_mixer
+  $mod+Shift+m exec $app_mixer
 
   # manage notifications
   $mod+BackSpace exec makoctl dismiss
