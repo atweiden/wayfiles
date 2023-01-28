@@ -76,6 +76,7 @@ as of `4310ebfee964584b5237c66d125bc681e7f90fee` (2023-01-29)
 - `.bin/conky-switcher`
 - `.config/conky`
 - `.config/dmenu`
+- `.config/feh`
 - `.config/libfm`
 - `.config/lxterminal`
 - `.config/nitrogen`
