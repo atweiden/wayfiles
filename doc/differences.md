@@ -4,6 +4,10 @@ as of `4310ebfee964584b5237c66d125bc681e7f90fee` (2023-01-29)
 
 ## Changes
 
+### `.Xdefaults`
+
+- Remove URxvt config
+
 ### `.bashrc`
 
 - Don't test for X11-related commands
