@@ -111,9 +111,9 @@ bindsym {
   $mod+space exec $app_menu
 
   # manage notifications
-  $mod+Delete makoctl dismiss --all
   $mod+BackSpace exec makoctl dismiss
-  $mod+Shift+BackSpace exec makoctl restore
+  $mod+Shift+BackSpace exec makoctl dismiss --all
+  $mod+z exec makoctl restore
 }
 
 # vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:
