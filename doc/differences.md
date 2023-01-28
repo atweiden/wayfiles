@@ -74,6 +74,7 @@ as of `4310ebfee964584b5237c66d125bc681e7f90fee` (2023-01-29)
 - `.config/volumeicon`
 - `.config/xfce4`
 - `.xinitrc`
+- `.xsession`
 
 
 [atweiden/pacfiles]: https://github.com/atweiden/pacfiles
