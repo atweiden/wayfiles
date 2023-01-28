@@ -22,6 +22,7 @@ as of `4310ebfee964584b5237c66d125bc681e7f90fee` (2023-01-29)
   - `xautolock-start` (*xautolock*)
 - Replace test for X11-related commands
   - `feh` → `imv`
+- Replace `feh` with `imv` for first choice `VIEWER` environment variable
 - Remove fallback to *ImageMagick* `display` for `VIEWER` environment
   variable
   - This breaks `.functions.d/qrshow.sh` when *imv* isn't installed
