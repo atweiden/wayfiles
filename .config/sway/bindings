@@ -82,7 +82,7 @@ bindsym {
   $mod+a focus parent
 
   # kill focused window
-  $mod+Shift+q kill
+  $mod+q kill
 
   # prevent changing tabs by scrolling mousewheel
   # disable vertical scrolling
@@ -109,6 +109,9 @@ bindsym {
 
   # launch application launcher
   $mod+space exec $app_menu
+
+  # launch audio controls
+  $mod+m exec $app_mixer
 
   # manage notifications
   $mod+BackSpace exec makoctl dismiss
