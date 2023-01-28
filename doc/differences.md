@@ -10,6 +10,8 @@ as of `4310ebfee964584b5237c66d125bc681e7f90fee` (2023-01-29)
 
 ### `.bashrc`
 
+- Test for `$WAYLAND_DISPLAY` environment variable in addition to
+  `$DISPLAY`
 - Don't test for X11-related commands
   - `feh`
   - `pcmanfm`
@@ -29,7 +31,9 @@ as of `4310ebfee964584b5237c66d125bc681e7f90fee` (2023-01-29)
 
 ### `.config/tmux/tmux.conf`
 
-- include `WAYLAND_DISPLAY` in `update-environment` command
+- Include `WAYLAND_DISPLAY` in `update-environment` command
+- Test for `$WAYLAND_DISPLAY` environment variable in addition to
+  `$DISPLAY`
 - Change `bind -T copy-mode-vi y` to use `wl-copy` from *wl-clipboard*
 
 ### `.inputrc`

@@ -130,7 +130,7 @@ elif [[ "$TERM" == 'linux' ]]; then
 fi
 
 # seoul256 console colors
-if [[ -z "$DISPLAY" ]]; then
+if [[ -z "$WAYLAND_DISPLAY" ]] && [[ -z "$DISPLAY" ]]; then
   echo -e "
   \e]P0121212
   \e]P1d68787
@@ -697,7 +697,7 @@ fi
 alias :e='"$EDITOR"'
 if [[ -n "$_has_vim" ]]; then
   # if not in X, tell vim not to attempt connection w/ X server
-  [[ -z "$DISPLAY" ]] \
+  [[ -z "$WAYLAND_DISPLAY" ]] && [[ -z "$DISPLAY" ]] \
     && alias vim='vim -X'
   alias view='vim -R'
   alias vime='vim \
