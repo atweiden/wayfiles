@@ -1,6 +1,6 @@
 # Diferences from [atweiden/pacfiles][atweiden/pacfiles] import
 
-as of `49b4757d0d349f37089d8c7f924764649bdb99bc`
+as of `4310ebfee964584b5237c66d125bc681e7f90fee` (2023-01-29)
 
 ## Changes
 
@@ -25,6 +25,7 @@ as of `49b4757d0d349f37089d8c7f924764649bdb99bc`
 
 ### `.config/tmux/tmux.conf`
 
+- include `WAYLAND_DISPLAY` in `update-environment` command
 - Change `bind -T copy-mode-vi y` to use `wl-copy` from *wl-clipboard*
 
 ### `.inputrc`
@@ -49,6 +50,11 @@ as of `49b4757d0d349f37089d8c7f924764649bdb99bc`
 - [enable modifyOtherKeys level 2][enable modifyOtherKeys level 2]
   for foot (see also: [1][foot wiki ctrl+key breaks input in vim]):
   `set keyprotocol=foot:mok2`
+
+### `bootstrap.sh`
+
+- Remove latitude/longitude cmdline flags
+- Change `README.txt` to `README.md`
 
 ## Removals
 
