@@ -43,14 +43,6 @@ as of `4310ebfee964584b5237c66d125bc681e7f90fee` (2023-01-29)
   - `vi-cmd-mode-string`
   - `vi-ins-mode-string`
 
-### `.vim`
-
-- Use [jasonccox/vim-wayland-clipboard][jasonccox/vim-wayland-clipboard]
-  or similar to fix system clipboard support in wayland pending
-  [#9639][#9639] (see also: [1][vim wayland clipboard i], [2][vim
-  wayland clipboard ii], [3][vim wayland clipboard iii], [4][vim wayland
-  clipboard iv])
-
 ### `.vim/config/base.vim`
 
 - [enable native mouse support][enable native mouse support] for foot:
@@ -58,6 +50,18 @@ as of `4310ebfee964584b5237c66d125bc681e7f90fee` (2023-01-29)
 - [enable modifyOtherKeys level 2][enable modifyOtherKeys level 2]
   for foot (see also: [1][foot wiki ctrl+key breaks input in vim]):
   `set keyprotocol=foot:mok2`
+
+### `.vim/config/packager.vim`
+
+- add [jasonccox/vim-wayland-clipboard][jasonccox/vim-wayland-clipboard]
+  to fix system clipboard support in wayland pending [#9639][#9639]
+  (see also: [1][vim wayland clipboard i], [2][vim wayland clipboard ii],
+  [3][vim wayland clipboard iii], [4][vim wayland clipboard iv])
+
+### `.vim/config/shortcuts.vim`
+
+- s/noremap/map for recursive clipboard mappings to facilitate usage of
+  [jasonccox/vim-wayland-clipboard][jasonccox/vim-wayland-clipboard]
 
 ### `bootstrap.sh`
 
