@@ -70,6 +70,26 @@ as of `4310ebfee964584b5237c66d125bc681e7f90fee` (2023-01-29)
 - Remove latitude/longitude cmdline flags
 - Change `README.txt` to `README.md`
 
+## Additions
+
+- `.config/electron-flags.conf`
+- `.config/fontconfig`
+- `.config/foot`
+- `.config/mako`
+- `.config/mpv`
+- `.config/ncpamixer.conf`
+- `.config/qt5ct`
+- `.config/qt6ct`
+- `.config/swappy`
+- `.config/sway`
+- `.config/swayidle`
+- `.config/wlsunset`
+- `.config/zathura`
+- `doc/differences.md`
+- `doc/third-party-licenses.md`
+- `etc/X11`
+- `etc/greetd`
+
 ## Removals
 
 - `.Xmodmap`
