@@ -1,10 +1,6 @@
 todo
 ====
 
-port more of pacfiles
-
-configure sway
-
 configure swaybar (see: `man 5 sway-bar`)
 - left
   - <numbered workspaces>

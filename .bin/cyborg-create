@@ -1,0 +1,195 @@
+#!/bin/bash
+
+# ----------------------------------------------------------------------------
+# cyborg-create: make borgbackup/borg create play nice
+# ----------------------------------------------------------------------------
+
+# ==============================================================================
+# constants {{{
+
+# $DATETIME contains present utc full date and time
+readonly DATETIME="$(date --utc '+%FT%T')"
+
+# $PROGNAME contains name of this program
+readonly PROGNAME='cyborg-create'
+
+# $VERSION contains $PROGNAME version number
+readonly VERSION=0.1.0
+
+# end constants }}}
+# ==============================================================================
+# usage {{{
+
+_usage() {
+read -r -d '' _usage_string <<EOF
+Usage:
+  $PROGNAME [-h|--help]
+  $PROGNAME [--exclude-from <file>]
+            [--exclude-caches]
+            <archive> <path> [<path> <path>..]
+
+Options:
+  -h, --help               Show this help text
+  -v, --version            Show program version
+  --exclude-caches         Exclude directories with a CACHEDIR.TAG file
+  --exclude-from <file>    Dispatch exclude patterns file to borg
+
+Positionals:
+  <archive>                Name of borgbackup/borg archive
+  <path>                   Path to files for borg archival
+
+Examples
+
+    # path to borg repo
+    export BORG_REPO='user@host:/path/to/borg/repo'
+
+    # passphrase to borg repo
+    export BORG_PASSPHRASE='password for borg repo'
+
+    # ssh options on client for connecting to remote host
+    export BORG_RSH="ssh -i \$HOME/.ssh/repo/id_ed25519"
+
+    # path to borg executable on remote host
+    export BORG_REMOTE_PATH='borg1'
+
+    # path to exclude patterns file for borg
+    export CYBORG_EXCLUDE_FROM="\$HOME/.config/borg/exclude"
+
+    # exclude directories that contain a CACHEDIR.TAG file
+    export CYBORG_EXCLUDE_CACHES=1
+
+    # create archive named tiberium-$DATETIME of resources dir
+    $PROGNAME tiberium-{utcnow} resources
+EOF
+echo "$_usage_string"
+}
+
+# end usage }}}
+# ==============================================================================
+
+_POSITIONAL=()
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -h|--help)
+      _usage
+      exit 0
+      ;;
+    -v|--version)
+      echo "$VERSION"
+      exit 0
+      ;;
+    --exclude-from)
+      _cyborg_exclude_from="$2"
+      # shift past argument and value
+      shift
+      shift
+      ;;
+    --exclude-caches)
+      _cyborg_exclude_caches=1
+      # shift past argument
+      shift
+      ;;
+    -*)
+      # unknown option
+      _usage
+      exit 1
+      ;;
+    *)
+      _POSITIONAL+=("$1")
+      shift
+      ;;
+  esac
+done
+
+# restore positional params
+set -- "${_POSITIONAL[@]}"
+
+if ! [[ ${#_POSITIONAL[@]} -ge 1 ]]; then
+  echo 'Sorry, missing borg archive name. Please supply name.'
+  _usage
+  exit 1
+fi
+
+if ! [[ ${#_POSITIONAL[@]} -ge 2 ]]; then
+  echo 'Sorry, missing path(s) for archival. Please supply path(s).'
+  _usage
+  exit 1
+fi
+
+if [[ -z "$BORG_REPO" ]]; then
+  echo 'Sorry, missing $BORG_REPO environment variable. Please export it.'
+  _usage
+  exit 1
+fi
+
+# --exclude-from cmdline flag takes precedence over environment variable
+_borg_exclude_from="${_cyborg_exclude_from:-$CYBORG_EXCLUDE_FROM}"
+
+# --exclude-caches cmdline flag takes precedence over environment variable
+_borg_exclude_caches="${_cyborg_exclude_caches:-$CYBORG_EXCLUDE_CACHES}"
+
+# $_borg_create_exit_code contains exit code for executed `borg create`
+_borg_create_exit_code=""
+
+# function borg_create executes `borg create` and stores exit code in
+# $_borg_create_exit_code
+borg_create() {
+  # $_args contains list of arguments passed to function borg_create
+  local _args=()
+
+  # $_archive_name contains name of borgbackup/borg archive
+  local _archive_name
+
+  # $_opts contains list of cmdline options for `borg create`
+  local _opts=()
+
+  # $_paths_for_archival contains list of paths to files for borg archival
+  local _paths_for_archival=()
+
+  _args=("$@")
+  _archive_name="$1"
+  _paths_for_archival=("${_args[@]:1}")
+
+  # be communicative
+  _opts+=('--verbose'
+          '--stats'
+          '--progress')
+
+  # don't cross filesystem boundaries
+  _opts+=('--one-file-system')
+
+  # anticipate remote host connection errors
+  # see: https://github.com/borgbackup/borg/issues/3988#issuecomment-478807213
+  _opts+=('--lock-wait=600')
+
+  # pass exclude patterns file if one was provided to cyborg
+  if [[ -n "$_borg_exclude_from" ]]; then
+    _opts+=("--exclude-from=$_borg_exclude_from")
+  fi
+
+  # pass exclude-caches flag to borg if one was provided to cyborg
+  if [[ -n "$_borg_exclude_caches" ]]; then
+    _opts+=("--exclude-caches")
+  fi
+
+  borg \
+    create \
+    "${_opts[@]}" \
+    "::$_archive_name" \
+    "${_paths_for_archival[@]}"
+
+  _borg_create_exit_code="$?"
+}
+
+# function main loops function borg_create until `borg create` exits
+# successfully
+main() {
+  until [[ "$_borg_create_exit_code" == '0' ]]; do
+    borg_create "$@"
+  done
+}
+
+main "$@"
+
+# vim: set filetype=sh foldmethod=marker foldlevel=0 nowrap:

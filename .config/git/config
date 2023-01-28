@@ -1,0 +1,263 @@
+[user]
+  #name = yourname
+  #email = youremail
+  useConfigOnly = true
+
+[github]
+  #user = githubusername
+
+[core]
+  editor = vim
+  # path to global attributes config file
+  attributesFile = ~/.config/git/attributes
+  # path to global ignore config file
+  excludesFile = ~/.config/git/ignore
+  # prevent git from silently damaging files
+  # https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#_formatting_and_whitespace
+  autocrlf = false
+  # prevent showing filenames containing non-ascii symbols as unversioned
+  # https://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
+  precomposeUnicode = false
+  # display utf-8 characters in filenames
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-corequotePath
+  quotePath = false
+  # make rebase safer on macos
+  # https://www.git-tower.com/blog/make-git-rebase-safe-on-osx/
+  trustCtime = false
+  # speed up commands involving untracked files, e.g. `git status`
+  # https://git-scm.com/docs/git-update-index#_untracked_cache
+  untrackedCache = true
+
+[init]
+  # explicitly set the default branch name to master
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-initdefaultBranch
+  defaultBranch = master
+
+[status]
+  # show individual files in untracked directories
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-statusshowUntrackedFiles
+  showUntrackedFiles = all
+  # show summary of commits for modified submodules
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-statussubmoduleSummary
+  submoduleSummary = true
+
+[branch]
+  # always set up tracking for new branches, not just remote branches
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-branchautoSetupMerge
+  autoSetupMerge = always
+  # configure `git pull`s on branches tracking others to rebase, not merge
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-branchautoSetupRebase
+  autoSetupRebase = always
+
+[push]
+  # use recommended push settings
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushdefault
+  default = simple
+  # push changes to submodules
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushrecurseSubmodules
+  recurseSubmodules = on-demand
+
+[pull]
+  # only allow fast-forward merges, never create an extra merge commit
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-pullff
+  ff = only
+
+[rebase]
+  # abort rebase and print warning if commits were removed during rebase
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-rebasemissingCommitsCheck
+  missingCommitsCheck = error
+  # reset dependent branches after rebasing
+  updateRefs = true
+
+[rerere]
+  # remember how to resolve hunk conflicts
+  # https://git-scm.com/book/en/v2/Git-Tools-Rerere
+  enabled = 1
+  # auto-stage files solved by rerere
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-rerereautoUpdate
+  autoupdate = true
+
+[diff]
+  # dispatch to vimdiff for diffing
+  tool = vimdiff
+  # use histogram algorithm, successor to `patience`
+  # https://git-scm.com/docs/git-diff#Documentation/git-diff.txt-codehistogramcode
+  algorithm = histogram
+  # create prettier diffs favoring whitespace lines to hunk boundaries
+  compactionHeuristic = true
+  indentHeuristic = true
+  # use prefix pair different from standard `a/` and `b/` as appropriate
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-diffmnemonicPrefix
+  mnemonicPrefix = true
+  # track more renamed files (grep diff_rename_limit_default git/diff.c)
+  renameLimit = 3000
+  # detect copied files in addition to basic renames
+  renames = copies
+  # show changed submodule contents rather than list of commits
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-diffsubmodule
+  submodule = diff
+  # only display changed lines once, with word delimiter of any 3+ chars
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-diffwordRegex
+  wordRegex = .{3,}
+  # highlight whitespace errors in diff
+  wsErrorHighlight = all
+
+[diff "bin"]
+  # dispatch to hexdump for diffing binaries
+  textconv = hexdump -v -C
+  binary = true
+
+[diff "exif"]
+  # dispatch to exiftool for diffing images
+  textconv = exiftool
+
+[difftool]
+  # launch difftool without prompting
+  prompt = false
+
+[merge]
+  # dispatch to splice.vim for merging
+  tool = splice
+  # include original source along with changes made by each side in diff
+  conflictStyle = diff3
+  # include merged commit summaries in newly created merge commit messages
+  log = true
+
+[mergetool]
+  # remove *.orig backups as files are successfully merged
+  # https://git-scm.com/docs/git-mergetool#_temporary_files
+  keepBackup = false
+  # all correctly indicate success of merge resolution with exit code
+  trustExitCode = true
+
+[mergetool "splice"]
+  cmd = "vim -f $BASE $LOCAL $REMOTE $MERGED -c 'packadd splice.vim' -c 'SpliceInit'"
+
+[mergetool "vimdiff"]
+  cmd = "vim -f -d $MERGED $LOCAL $BASE $REMOTE -c 'wincmd J'"
+
+[stash]
+  # make `git stash show` display stash entry in patch form
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-stashshowPatch
+  showPatch = true
+
+# https://git-scm.com/docs/git-send-email
+[sendemail]
+  # review and edit each patch to be sent
+  annotate = true
+  # always confirm before sending
+  confirm = always
+  # avoid carbon copying self as sender
+  supresscc = self
+  # use hosted configuration profile for sending
+  identity = hosted
+
+[sendemail "hosted"]
+  #smtpUser = youremail
+  #smtpServer = smtp.server.tld
+  #smtpServerPort = 587
+  #smtpEncryption = tls
+
+# for integrity, regularly check anything we're getting is complete/sane
+# https://groups.google.com/forum/#!topic/binary-transparency/f-BI4o8HZW0
+[transfer]
+  fsckObjects = true
+[fetch]
+  fsckObjects = true
+[receive]
+  fsckObjects = true
+
+# enable optimizations for repos with many files in working directory
+# https://git-scm.com/docs/git-config#Documentation/git-config.txt-featuremanyFiles
+[feature]
+  manyFiles = true
+
+[format]
+  # be concise in merge commits
+  # https://git-scm.com/docs/pretty-formats
+  pretty = oneline
+
+[color]
+  # colorize command output if possible, unless sent to pipe/file
+  # https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#_colors_in_git
+  ui = auto
+
+[color "diff"]
+  old = red bold
+  new = green bold
+  whitespace = red reverse
+
+[color "diff-highlight"]
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
+
+# use diffr diff highlighter
+# https://github.com/mookid/diffr#how-to-use-it
+#[pager]
+#  diff = diffr $DIFFR | less
+#  log = diffr $DIFFR | less
+#  show = diffr $DIFFR | less
+#
+#[interactive]
+#  diffFilter = diffr $DIFFR
+
+[alias]
+  # common
+  br = branch
+  ci = commit
+  co = checkout
+  ls = ls-files
+  pf = push --force-with-lease
+  rev = rev-parse HEAD
+  sq = squash
+  st = status --short --branch
+  url = config remote.origin.url
+
+  # function
+  # show diff between latest commit and current state
+  d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+  # show diff between state from number of revisions ago and current state
+  di = !"f() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; f"
+  # diff revision against antecedent revision, like github
+  diffrev = "!f() { TARGET=$1; git diff -r $1~ -r $1; }; f"
+  # find branches containing commit
+  find-branch-by-commit = "!f() { git branch -a --contains $1; }; f"
+  # find commits containing source code
+  find-commit-by-code = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+  # find commits containing commit message
+  find-commit-by-message = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+  # find tags containing commit
+  find-tag-by-commit = "!f() { git describe --always --contains $1; }; f"
+  # remove old tag of this name, tag latest commit with it
+  retag = "!f() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; f"
+  # show full text of commit message by commit
+  show-commit-message = "!f() { git --no-pager show --pretty=format:'%B' --no-patch $1; }; f"
+  # perform interactive rebase with given number of most recent commits
+  squash = "!f() { git rebase -i HEAD~$1; }; f"
+  # force push latest revision without modifications, useful for travis-ci
+  touch = "!f() { git commit --amend --no-edit && git push -f; }; f"
+  # undo last commit, putting changes back into working copy
+  undo = "!f() { git reset --mixed HEAD~1; }; f"
+
+  # list
+  ls-aliases = config --get-regexp alias
+  ls-branches = branch -a
+  ls-config = config --list --local
+  ls-contributors = shortlog --summary --numbered
+  ls-remotes = remote -v
+  ls-tags = tag -l
+
+  # log
+  # view abbreviated sha, desc, and history graph of latest 20 commits
+  l = log --graph --pretty=oneline --abbrev-commit --max-count=20
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  lga = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all
+  logjson = log --pretty=format:'{%n  \"commit\": \"%H\",%n  \"abbreviated_commit\": \"%h\",%n  \"tree\": \"%T\",%n  \"abbreviated_tree\": \"%t\",%n  \"parent\": \"%P\",%n  \"abbreviated_parent\": \"%p\",%n  \"refs\": \"%D\",%n  \"encoding\": \"%e\",%n  \"subject\": \"%s\",%n  \"sanitized_subject_line\": \"%f\",%n  \"body\": \"%b\",%n  \"commit_notes\": \"%N\",%n  \"verification_flag\": \"%G?\",%n  \"signer\": \"%GS\",%n  \"signer_key\": \"%GK\",%n  \"author\": {%n    \"name\": \"%aN\",%n    \"email\": \"%aE\",%n    \"date\": \"%aD\"%n  },%n  \"commiter\": {%n    \"name\": \"%cN\",%n    \"email\": \"%cE\",%n    \"date\": \"%cD\"%n  }%n},'
+  logv = log -v --pretty
+
+  # repack
+  optimize = repack -a -d -f --depth=4096 --window=4096 --window-memory=0
+
+# vim: set filetype=gitconfig foldmethod=marker foldlevel=0 nowrap:

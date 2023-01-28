@@ -1,0 +1,29 @@
+vim9script
+
+# avoid side effects when reloading vimrc
+if &compatible | set nocompatible | endif
+
+$VIMPATH = $HOME .. '/.vim'
+$CFGPATH = $VIMPATH .. '/config'
+$ALDPATH = $VIMPATH .. '/autoload/home'
+$COLORSCHEME = 'seoul256'
+
+def SourceConfig(path: string): void
+  execute 'source' fnameescape($CFGPATH .. '/' .. path)
+enddef
+
+SourceConfig('reset.vim')
+SourceConfig('base.vim')
+SourceConfig('commands.vim')
+SourceConfig('filetypes.vim')
+SourceConfig('editing.vim')
+SourceConfig('display.vim')
+SourceConfig('shortcuts.vim')
+SourceConfig('packager.vim')
+SourceConfig('plugins.vim')
+SourceConfig('terminal.vim')
+
+filetype plugin indent on
+if !exists('g:syntax_on') | syntax enable | endif
+
+# vim: set filetype=vim foldmethod=marker foldlevel=0 nowrap:
