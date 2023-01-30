@@ -88,7 +88,6 @@ as of `4310ebfee964584b5237c66d125bc681e7f90fee` (2023-01-29)
 - `doc/differences.md`
 - `doc/third-party-licenses.md`
 - `etc/X11`
-- `etc/greetd`
 
 ## Removals
 
