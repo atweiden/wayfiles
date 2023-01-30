@@ -11,7 +11,4 @@ exec mkfifo $WOBSOCK && tail --follow=$WOBSOCK | wob
 
 exec $bin/wlsunset-with-config
 
-# open terminal on startup
-exec swaymsg 'workspace $ws1; exec $app_term'
-
 # vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:
