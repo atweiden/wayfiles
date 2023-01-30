@@ -62,10 +62,11 @@
   },
   "network": {
     "format-wifi": "  {essid}",
-    "format-ethernet": "󰤮 Disconnected",
+    "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
     "format-linked": "{ifname} (No IP) ",
     "format-disconnected": "󰤮 Disconnected",
     "tooltip-format-wifi": "Signal Strength: {signalStrength}% | Down Speed: {bandwidthDownBits}, Up Speed: {bandwidthUpBits}",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}"
   },
   "pulseaudio": {
     "on-click": "pactl set-sink-mute 45 toggle",
