@@ -35,6 +35,8 @@ shoe
     |     fi
     - https://github.com/sblumentritt/settei/blob/dev/shared/config/.bashrc
 
+replace pulseaudio with pipewire
+
 
 ******************************************************************************
 
