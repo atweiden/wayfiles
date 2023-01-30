@@ -1,4 +1,4 @@
-set $mode_exit "⌬ [l]ock [e]xit [s]uspend [r]eload [h]ibernate [R]eboot [S]hutdown"
+set $mode_exit "⌬ [l]ock [e]xit [s]uspend [r]eload [R]eboot [S]hutdown"
 
 mode $mode_exit {
   bindsym {
@@ -9,13 +9,10 @@ mode $mode_exit {
     e exec swaymsg exit, mode "default"
 
     # suspend
-    s exec systemctl suspend-then-hibernate, mode "default"
+    s exec systemctl suspend, mode "default"
 
     # reload sway config
     r reload, mode "default"
-
-    # hibernate
-    h exec systemctl hibernate, mode "default"
 
     # reboot
     Shift+r exec sudo systemctl reboot, mode "default"
