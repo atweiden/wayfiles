@@ -122,6 +122,13 @@ bindsym {
   $mod+BackSpace exec makoctl dismiss
   $mod+Shift+BackSpace exec makoctl dismiss --all
   $mod+z exec makoctl restore
+
+  # show exit menu
+  $mod+Shift+e exec $app_exit
+
+  # show power menu
+  $mod+Shift+p exec $app_power
+  XF86PowerOff exec $app_power
 }
 
 # vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:

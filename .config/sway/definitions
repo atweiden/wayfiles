@@ -23,13 +23,13 @@ set {
 
   $bin $XDG_CONFIG_HOME/sway/bin
 
+  $app_exit swaynag --type custom --message 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' --button 'Yes, exit sway' 'swaymsg exit'
   $app_idle swayidle -w
+  $app_power swaynag --type custom --message 'What action would you like to perform?' --button 'Shutdown' 'sudo systemctl poweroff -i' --button 'Reboot' 'sudo systemctl reboot' --button 'Suspend' 'systemctl suspend'
   $app_term $bin/shoe
+  $app_menu $app_term --app-id=launcher bash -c $bin/fzf-menu
   $app_mixer $app_term --app-id=termfloat ncpamixer
   $app_music $app_term --app-id=termfloat cmus
-
-  # launch applications with fzf
-  $app_menu exec $app_term --app-id=launcher bash -c $bin/fzf-menu
 
   $screencap_dir $HOME/Downloads
   $screenrec_file $screencap_dir/recording-$(date +'%Y-%m-%d-%H%M%S').mp4
