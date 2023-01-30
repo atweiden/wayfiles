@@ -13,35 +13,9 @@ bar {
     mode hide
     modifier $alt+$mod
 
-    height 35
-    position top
-
-    wrap_scroll no
-    tray_output none
-
-    strip_workspace_name no
-    strip_workspace_numbers yes
-
-    status_padding 0
-    status_edge_padding 0
-    status_command exec $bin/sway-bar-status-info
-
-    workspace_min_width 40
-
-    colors {
-        separator $gray
-        statusline $foreground
-        background $background
-
-        active_workspace $gray $gray $background
-        inactive_workspace $gray $gray $background
-
-        focused_workspace $green $green $background
-        urgent_workspace $yellow $yellow $background
-    }
+    swaybar_command waybar
 
     # prevent changing workspace by scrolling mousewheel
-    # like i3: wheel_up_cmd nop, wheel_down_cmd nop
     bindsym {
       # disable vertical scrolling
       button4 nop
