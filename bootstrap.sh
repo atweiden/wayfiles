@@ -104,6 +104,7 @@ _rsync_opts+=('--exclude=.git'
               '--exclude=.hg'
               '--exclude=.subgit'
               '--exclude=doc'
+              '--exclude=etc'
               '--exclude=bootstrap.sh'
               '--exclude=README.md'
               '--exclude=UNLICENSE')
