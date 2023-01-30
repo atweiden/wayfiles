@@ -6,10 +6,10 @@ input type:keyboard {
   xkb_options "caps:backspace,shift:both_capslock_cancel"
 
   # delay in milliseconds
-  repeat_delay 200
+  repeat_delay 500
 
   # number of repeats per second
-  repeat_rate 66
+  repeat_rate 44
 }
 
 # vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:
