@@ -9,14 +9,17 @@ export CLUTTER_BACKEND="wayland"
 # configure firefox for wayland
 export MOZ_ENABLE_WAYLAND=1
 
+# enable firefox touch scrolling and multitouch support
+export MOZ_USE_XINPUT2=1
+
+# make firefox aware of wayland instance when launched from x11
+export MOZ_DBUS_REMOTE=1
+
 # configure gtk for wayland
 export GDK_BACKEND="wayland"
 
 # prevent waiting for xdg-desktop-portal (flatpak)
 export GTK_USE_PORTAL=0
-
-# make firefox aware of wayland instance when launched from x11
-export MOZ_DBUS_REMOTE=1
 
 # configure java applications for sway
 export _JAVA_AWT_WM_NONREPARENTING=1

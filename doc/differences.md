@@ -27,6 +27,10 @@ as of `4310ebfee964584b5237c66d125bc681e7f90fee` (2023-01-29)
   variable
   - This breaks `.functions.d/qrshow.sh` when *imv* isn't installed
 
+### `.bash_profile`
+
+- Add mostly Wayland-related exports
+
 ### `.config/gtk-3.0/settings.ini`
 
 - Adopt settings from [sblumentritt/settei][sblumentritt/settei]
