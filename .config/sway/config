@@ -16,8 +16,8 @@ focus_wrapping no
 
 # use tmux-style dividers rather than gaps/edges
 hide_edge_borders both
-new_float pixel 1
-new_window pixel 1
+default_floating_border pixel 1
+default_border pixel 1
 
 xwayland enable
 
