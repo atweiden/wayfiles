@@ -11,7 +11,7 @@ bar {
     # hide bar by default, show with modifier key
     hidden_state hide
     mode hide
-    modifier $mod
+    modifier $alt+$mod
 
     height 35
     position top
