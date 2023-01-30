@@ -106,6 +106,9 @@ bindsym {
   XF86MonBrightnessUp exec light -S "$(light -G | awk '{ print int(($1 + .72) * 1.4) }')" && light -G | cut --delimiter='.' --fields=1 > $WOBSOCK
   XF86MonBrightnessDown exec light -S "$(light -G | awk '{ print int($1 / 1.4) }')" && light -G | cut --delimiter='.' --fields=1 > $WOBSOCK
 
+  # launch screen locker
+  $mod+Shift+l exec $app_lock
+
   # launch terminal
   $mod+Return exec $app_term
 

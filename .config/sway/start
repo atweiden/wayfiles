@@ -3,8 +3,6 @@ exec systemctl --user import-environment WAYLAND_DISPLAY DISPLAY SWAYSOCK WOBSOC
 exec hash dbus-update-activation-environment 2>/dev/null \
   && dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY SWAYSOCK WOBSOCK
 
-exec_always $app_idle
-
 exec mako
 
 exec mkfifo $WOBSOCK && tail --follow=$WOBSOCK | wob
