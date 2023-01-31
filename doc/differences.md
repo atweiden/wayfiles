@@ -76,19 +76,23 @@ as of `4310ebfee964584b5237c66d125bc681e7f90fee` (2023-01-29)
 
 ## Additions
 
-- `.config/electron-flags.conf`
 - `.config/fontconfig`
 - `.config/foot`
+- `.config/kitty`
 - `.config/mako`
 - `.config/mpv`
-- `.config/ncpamixer.conf`
 - `.config/qt5ct`
 - `.config/qt6ct`
 - `.config/swappy`
 - `.config/sway`
-- `.config/swayidle`
+- `.config/swaylock`
+- `.config/swaynag`
+- `.config/waybar`
 - `.config/wlsunset`
+- `.config/wofi`
 - `.config/zathura`
+- `.config/electron-flags.conf`
+- `.config/ncpamixer.conf`
 - `doc/differences.md`
 - `doc/third-party-licenses.md`
 - `etc/X11`
