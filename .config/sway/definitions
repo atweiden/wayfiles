@@ -27,7 +27,7 @@ set {
   $app_lock swayidle -w timeout 1 'swaylock --daemonize' timeout 10 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"; killall swayidle'
   $app_power swaynag --type custom --message 'What action would you like to perform?' --button 'Shutdown' 'sudo systemctl poweroff -i' --button 'Reboot' 'sudo systemctl reboot' --button 'Suspend' 'systemctl suspend'
   $app_term $bin/shoe
-  $app_menu $app_term --app-id=launcher bash -c $bin/fzf-menu
+  $appmenu wofi --hide-scroll | xargs swaymsg exec --
   $app_mixer $app_term --app-id=termfloat ncpamixer
   $app_music $app_term --app-id=termfloat cmus
 

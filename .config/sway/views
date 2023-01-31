@@ -1,16 +1,11 @@
 for_window {
   [app_id="firefox" title="Library"] floating enable, border pixel 1, sticky enable, resize set width 60 ppt height 80 ppt
   [app_id="imv"] floating enable
-  [app_id="^launcher$"] floating enable, border none, opacity 0.8
   [app_id="^termfloat$"] floating enable
   [window_role="notification"] floating enable sticky enable
   [window_type="notification"] floating enable sticky enable
   [window_role="pop-up"] floating enable sticky enable
   [window_role="task_dialog"] floating enable sticky enable
-
-  # inhibit_idle if there are windows in fullscreen mode
-  [app_id=".*"] inhibit_idle fullscreen
-  [class=".*"] inhibit_idle fullscreen
 }
 
 # vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:
