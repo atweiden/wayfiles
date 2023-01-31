@@ -1,36 +1,20 @@
-# --------------------------------------
-# mako configuration
-# --------------------------------------
+layer=top
+anchor=bottom-right
 font=mononoki Nerd Font 10
-
-background-color=#3b3b3b
-text-color=#f7e2d0
-
-width=270
-height=500
-
-margin=15
-padding=15
-
-border-size=4
-border-color=#454545
-
-icons=0
-markup=1
-actions=0
-format=[%a]\n<b>%s</b>\n%b
-
+background-color=#0f0f0f
+text-color=#f0f0f0
+width=350
+margin=0,30,30
+padding=10
+border-size=2
+border-color=#262626
+progress-color=over #262626ff
+border-radius=5
 default-timeout=10000
+group-by=summary
 
-[urgency=low]
-text-color=#c6bb8d
-
-[urgency=normal]
-text-color=#f7e2d0
-
-[urgency=high]
-text-color=#f3b785
-default-timeout=0
+[grouped]
+format=<b>%s</b>\n%b
 
 # hide all notifications if "do-not-disturb" mode is enabled
 #
