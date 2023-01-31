@@ -38,7 +38,8 @@
   "custom/date": {
     "format": "󰸗 {}",
     "interval": 3600,
-    "exec": "date +'%a %d'"
+    "exec": "date +'%a %d'",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
   "clock": {
     "format": "󰅐 {:%H:%M} ",
