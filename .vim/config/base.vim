@@ -143,7 +143,7 @@ set redrawtime=10000
 silent! set ttymouse=sgr
 
 # ensure modifyOtherKeys level 2 is enabled in foot
-silent! set keyprotocol=foot:mok2
+silent! set keyprotocol=foot:mok2,kitty:kitty,xterm:mok2
 
 # format lines with fmt
 set formatprg=fmt
