@@ -1,5 +1,5 @@
 [custom]
-font=mononoki Nerd Font 10
+font=MonoLisa 10
 dismiss-button=Dismiss
 background=0f0f0f
 border=262626
@@ -14,4 +14,3 @@ button-gap=5
 button-dismiss-gap=5
 button-margin-right=5
 button-padding=5
-
