@@ -142,8 +142,8 @@ set redrawtime=10000
 # terminal type for mouse codes
 silent! set ttymouse=sgr
 
-# ensure modifyOtherKeys level 2 is enabled in foot
-silent! set keyprotocol=foot:mok2,kitty:kitty,xterm:mok2
+# ensure kitty keyboard protocol is enabled in foot
+silent! set keyprotocol=foot:kitty,kitty:kitty,xterm:mok2
 
 # format lines with fmt
 set formatprg=fmt
