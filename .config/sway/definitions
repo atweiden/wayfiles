@@ -34,8 +34,6 @@ set {
   $screencap_dir $HOME/Downloads
   $screenrec_file $screencap_dir/recording-$(date +'%Y-%m-%d-%H%M%S').mp4
   $screenshot_file $screencap_dir/screenshot-$(date +'%Y-%m-%d-%H%M%S').png
-
-  $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 }
 
 # vim: set filetype=swayconfig foldmethod=marker foldlevel=0 nowrap:

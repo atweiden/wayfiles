@@ -1,11 +1,9 @@
 # set WAYLAND_DISPLAY/DISPLAY in systemd user environment, see: FS#63021
-exec systemctl --user import-environment WAYLAND_DISPLAY DISPLAY SWAYSOCK WOBSOCK
+exec systemctl --user import-environment WAYLAND_DISPLAY DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null \
-  && dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY SWAYSOCK WOBSOCK
+  && dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY SWAYSOCK
 
 exec mako
-
-exec mkfifo $WOBSOCK && tail --follow=$WOBSOCK | wob
 
 exec $bin/wlsunset-with-config
 
