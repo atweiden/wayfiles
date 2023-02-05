@@ -3,7 +3,7 @@
 _usage_function() {
 read -r -d '' _usage_string <<'EOF'
 Usage:
-  archinfo [-c|--color <color>]
+  voidinfo [-c|--color <color>]
 
 Colors:
   black, red, green, yellow, blue (default), magenta, cyan, white
@@ -102,7 +102,7 @@ _output_os_function() {
   local _output_os
 
   _architecture="$(uname -m)"
-  _os="$(printf 'Arch %s' "$_architecture")"
+  _os="$(printf 'Void %s' "$_architecture")"
   _output_os="$(_output_function 'OS' "$_os")"
 
   echo "$_output_os"
@@ -233,7 +233,7 @@ _output_packages_function() {
   local _packages
   local _output_packages
 
-  _packages="$(pacman -Qq | wc -l)"
+  _packages="$(xbps-query --list-pkgs | wc -l)"
   _output_packages="$(_output_function 'Packages' "$_packages")"
 
   echo "$_output_packages"
@@ -334,35 +334,35 @@ _output_array=(
 )
 
 # end _output_array }}}
-# _archinfo {{{
+# _voidinfo {{{
 
-read -r -d '' _archinfo_string <<'EOF'
+read -r -d '' _voidinfo_string <<'EOF'
 %s
-%s               +
-%s               #
-%s              ###
-%s             #####
-%s             ######
-%s            ; #####;            %s
-%s           +##.#####            %s
-%s          +##########           %s
-%s         #############;         %s
-%s        ###############+        %s
-%s       #######   #######        %s
-%s     .######;     ;###;`".      %s
+%s #'                         `#
+%s  ##'                     '##
+%s  ;####                 ####;
+%s   ######'           '######
+%s    #########.   .########`
 %s    .#######;     ;#####.       %s
-%s    #########.   .########`     %s
-%s   ######'           '######    %s
-%s  ;####                 ####;   %s
-%s  ##'                     '##   %s
-%s #'                         `#  %s
+%s     .######;     ;###;`".      %s
+%s       #######   #######        %s
+%s        ###############+        %s
+%s         #############;         %s
+%s          +##########           %s
+%s           +##.#####            %s
+%s            ; #####;            %s
+%s             ######             %s
+%s             #####              %s
+%s              ###               %s
+%s               #                %s
+%s               +                %s
 %s
 EOF
 
-_archinfo="$(printf "$_archinfo_string\\n" "${_output_array[@]}")"
+_voidinfo="$(printf "$_voidinfo_string\\n" "${_output_array[@]}")"
 
-# end _archinfo }}}
+# end _voidinfo }}}
 
-echo "${_archinfo}"
+echo "${_voidinfo}"
 
 # vim: set filetype=sh foldmethod=marker foldlevel=0 nowrap:

@@ -1,7 +1,7 @@
-Wayfiles
+wayfiles
 ========
 
-Arch Wayland development environment configuration
+Void Wayland development environment configuration
 
 
 Licensing

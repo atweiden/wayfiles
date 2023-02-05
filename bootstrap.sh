@@ -67,9 +67,9 @@ done
 # settings
 # -----------------------------------------------------------------------------
 
-# e.g. Andy Weidenbaum (for git/hg, aur)
+# e.g. Andy Weidenbaum (for git/hg)
 name="${_name:-$USER}"
-# e.g. atweiden@ioiojo.com (for git/hg, aur)
+# e.g. atweiden@ioiojo.com (for git/hg)
 email="${_email:-$USER@$HOSTNAME}"
 # e.g. atweiden (for github)
 github="${_github:-$USER}"
@@ -145,14 +145,6 @@ if ! [[ -d "$_packager_dst" ]]; then
     /dev/null 2>&1
   echo 'done.'
 fi
-
-
-# -----------------------------------------------------------------------------
-# makepkg
-# -----------------------------------------------------------------------------
-
-sed -i "s#yourname#$name#"         "$HOME/.config/pacman/makepkg.conf"
-sed -i "s#youremail#$email#"       "$HOME/.config/pacman/makepkg.conf"
 
 
 # -----------------------------------------------------------------------------

@@ -184,13 +184,6 @@ PATH="$HOME/.bin:$PATH"
 PATH="$HOME/.go/bin:$PATH"
 
 # --- end go }}}
-# --- perl {{{
-
-PATH="/usr/bin/vendor_perl:$PATH"
-PATH="/usr/bin/core_perl:$PATH"
-PATH="/usr/bin/site_perl:$PATH"
-
-# --- end perl }}}
 # --- python {{{
 
 PATH="$HOME/.pyenv/bin:$PATH"
@@ -199,9 +192,9 @@ PATH="$HOME/.pyenv/bin:$PATH"
 # --- raku {{{
 
 PATH="$HOME/.raku/bin:$PATH"
-PATH="/usr/share/perl6/core/bin:$PATH"
-PATH="/usr/share/perl6/site/bin:$PATH"
-PATH="/usr/share/perl6/vendor/bin:$PATH"
+PATH="/usr/lib/raku/core/bin:$PATH"
+PATH="/usr/lib/raku/site/bin:$PATH"
+PATH="/usr/lib/raku/vendor/bin:$PATH"
 
 # --- end raku }}}
 # --- rust {{{
@@ -234,7 +227,6 @@ _has_irb="$(command -v irb)"
 _has_irssi="$(command -v irssi)"
 _has_locate="$(command -v locate)"
 _has_lynx="$(command -v lynx)"
-_has_makepkg="$(command -v makepkg)"
 _has_mimeo="$(command -v mimeo)"
 _has_mosh="$(command -v mosh)"
 _has_ncdu="$(command -v ncdu)"
@@ -242,7 +234,6 @@ _has_nvim="$(command -v nvim)"
 _has_rclone="$(command -v rclone)"
 _has_rg="$(command -v rg)"
 _has_sqlite3="$(command -v sqlite3)"
-_has_systemctl="$(command -v systemctl)"
 _has_tmux="$(command -v tmux)"
 _has_tree="$(command -v tree)"
 _has_units="$(command -v units)"
@@ -421,7 +412,7 @@ alias fgrep='grep --fixed-strings'
 alias history\?='history | grep --invert-match "history\?" | grep "$@"'
 alias ls\?='ls -1F | grep "$@"'
 alias ps\?='ps -a -x -f | grep --invert-match grep | grep "$@"'
-alias pkg\?='pacman -Q | grep "$@"'
+alias pkg\?='xbps-query --search "$@"'
 alias sysctl\?='sysctl --all 2>/dev/null | grep "$@"'
 [[ -n "$_has_ack" ]] \
   && alias ack='ack \
@@ -466,12 +457,6 @@ alias info='info --vi-keys'
   && alias lynx='lynx -cfg $HOME/.config/lynx/lynx.cfg'
 
 # --- end lynx }}}
-# --- pacman {{{
-
-[[ -n "$_has_makepkg" ]] \
-  && alias mksrcinfo='makepkg --printsrcinfo >| .SRCINFO'
-
-# --- end pacman }}}
 # --- path {{{
 
 alias path='echo -e ${PATH//:/\\n}'
@@ -541,12 +526,6 @@ alias timer='echo "Timer started. Stop with Ctrl-D." \
   && date'
 
 # --- end stopwatch }}}
-# --- systemctl {{{
-
-[[ -n "$_has_systemctl" ]] \
-  && alias userctl='systemctl --user'
-
-# --- end systemctl }}}
 # --- text {{{
 
 alias hr='printf "$(printf "\e["$(shuf -i 91-97 -n 1)";1m%%%ds\e[0m\n" "$(tput cols)")" \
@@ -719,6 +698,7 @@ if [[ -n "$_has_vim" ]]; then
   alias rview='view -Z'
 fi
 if [[ -n "$_has_gvim" ]]; then
+  alias gvim='gvim-huge'
   alias gview='gvim -R'
   alias gvime='gvim \
     --cmd "set viminfo=" \
@@ -843,13 +823,13 @@ export FZF_CTRL_R_OPTS="--preview 'echo {}' \
 [[ -r '/usr/share/fzf/key-bindings.bash' ]] \
   && source /usr/share/fzf/key-bindings.bash
 # source fzf functions
-[[ -r '/usr/share/fzf/fzf-extras.bash' ]] \
-  && source /usr/share/fzf/fzf-extras.bash
+[[ -r "$HOME/.fzf-extras/fzf-extras.sh" ]] \
+  && source "$HOME/.fzf-extras/fzf-extras.sh"
 
 # --- end fzf }}}
 # --- gerbil {{{
 
-export GERBIL_GSC='/usr/bin/gambitc'
+export GERBIL_GSC='/usr/bin/gambit-gsc'
 export GERBIL_HOME='/usr/lib/gerbil'
 
 # --- end gerbil }}}
@@ -903,6 +883,11 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PYTHONDONTWRITEBYTECODE=1
 
 # --- end python }}}
+# --- raku {{{
+
+export RAKUDO_HOME='/usr/lib/raku'
+
+# --- end raku }}}
 # --- rlwrap {{{
 
 export RLWRAP_HOME="$HOME/.config/rlwrap"
@@ -928,6 +913,11 @@ if [[ -n "$_has_imv" ]]; then
 fi
 
 # --- end viewer }}}
+# --- xtools {{{
+
+export XLOCATE_GIT="$HOME/.config/xtools/xlocate.git"
+
+# --- end xtools }}}
 
 # end software }}}
 # ==============================================================================
@@ -1029,11 +1019,11 @@ export FIGNORE
 # ==============================================================================
 # system {{{
 
-if [[ -x "$HOME/.bin/archinfo" && -z "$VIMRUNTIME" ]]; then
+if [[ -x "$HOME/.bin/voidinfo" && -z "$VIMRUNTIME" ]]; then
   if ! [[ "$UID" == '0' ]]; then
-    archinfo
+    voidinfo -c green
   else
-    archinfo -c red
+    voidinfo -c red
   fi
 fi
 
