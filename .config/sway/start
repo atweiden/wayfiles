@@ -1,3 +1,4 @@
+exec $app_idle
 exec mako
 exec $bin/wlsunset-with-config
 
