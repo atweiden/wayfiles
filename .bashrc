@@ -1019,6 +1019,9 @@ FIGNORE="$FIGNORE:argo.lock"
 # don't shell-complete zig-cache
 FIGNORE="$FIGNORE:ig-cache"
 
+# don't shell-complete zig-out
+FIGNORE="$FIGNORE:ig-out"
+
 # --- end zig }}}
 
 export FIGNORE
